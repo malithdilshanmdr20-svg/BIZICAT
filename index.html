@@ -1,0 +1,2605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BIZICAT — Digital Catalogs That Grow Your Business</title>
+
+    <meta name="description"
+          content="BIZICAT helps local businesses create digital product catalogs, receive WhatsApp orders, showcase best-selling products and grow online.">
+
+    <meta name="keywords"
+          content="BIZICAT, digital catalog, online catalog, WhatsApp ordering, business catalog, local business, Sri Lanka, product catalog, WhatsApp orders">
+
+    <meta name="author" content="BIZICAT">
+
+    <meta property="og:title"
+          content="BIZICAT — Digital Catalogs That Grow Your Business">
+
+    <meta property="og:description"
+          content="Create your digital catalog, receive orders through WhatsApp and get discovered by more customers.">
+
+    <meta property="og:type" content="website">
+
+    <meta name="theme-color" content="#101c2c">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        :root {
+            --navy: #101c2c;
+            --navy-2: #17263a;
+            --teal: #09a6b5;
+            --teal-dark: #078b99;
+            --teal-light: #e8fbfd;
+            --white: #ffffff;
+            --off-white: #f6f9fb;
+            --text: #142033;
+            --muted: #6b7788;
+            --border: #e7edf2;
+            --shadow: 0 20px 60px rgba(16, 28, 44, .10);
+            --shadow-heavy: 0 30px 80px rgba(16, 28, 44, .16);
+            --radius: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            color: var(--text);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            width: min(1160px, calc(100% - 36px));
+            margin: auto;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: .3s;
+        }
+
+        header.scrolled {
+            background: rgba(255,255,255,.94);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 5px 30px rgba(0,0,0,.06);
+        }
+
+        .nav {
+            height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: -.7px;
+        }
+
+        .logo img {
+            width: 46px;
+            height: 46px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #566274;
+        }
+
+        .nav-links a {
+            transition: .2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--teal);
+        }
+
+        .nav-actions {
+            display: none;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 13px;
+            padding: 13px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: .25s;
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--navy);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--teal);
+        }
+
+        .btn-primary {
+            color: white;
+            background: var(--navy);
+            box-shadow: 0 10px 25px rgba(16,28,44,.18);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background: #1a2d44;
+        }
+
+        .btn-teal {
+            background: var(--teal);
+            color: white;
+            box-shadow: 0 10px 25px rgba(9,166,181,.24);
+        }
+
+        .btn-teal:hover {
+            transform: translateY(-2px);
+            background: var(--teal-dark);
+        }
+
+        .menu-btn {
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 12px;
+            font-size: 21px;
+        }
+
+        /* ================= MOBILE MENU ================= */
+
+        .mobile-menu {
+            position: fixed;
+            top: 76px;
+            left: 18px;
+            right: 18px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-heavy);
+            padding: 20px;
+            display: none;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            display: block;
+            animation: slideDown .25s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 15px 10px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-menu .btn {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            padding: 145px 0 80px;
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 90% 15%, rgba(9,166,181,.12), transparent 28%),
+                radial-gradient(circle at 5% 80%, rgba(16,28,44,.07), transparent 25%),
+                #fff;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 55px;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: var(--teal-light);
+            color: var(--teal-dark);
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 22px;
+        }
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--teal);
+            box-shadow: 0 0 0 5px rgba(9,166,181,.12);
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 8vw, 76px);
+            line-height: .98;
+            letter-spacing: -4px;
+            font-weight: 900;
+            color: var(--navy);
+            max-width: 800px;
+        }
+
+        .hero h1 span {
+            color: var(--teal);
+        }
+
+        .hero-text {
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.7;
+            max-width: 620px;
+            margin-top: 25px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .hero-buttons .btn {
+            padding: 15px 22px;
+        }
+
+        .trust {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            color: #748092;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .trust span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ================= HERO MOCKUP ================= */
+
+        .hero-visual {
+            position: relative;
+            min-height: 480px;
+        }
+
+        .dashboard {
+            background: white;
+            border: 1px solid #e8edf1;
+            border-radius: 25px;
+            box-shadow: var(--shadow-heavy);
+            overflow: hidden;
+            transform: perspective(1000px) rotateY(-4deg) rotateX(2deg);
+        }
+
+        .dash-top {
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 18px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dash-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            font-size: 13px;
+        }
+
+        .dash-brand img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .dash-profile {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--teal-light);
+        }
+
+        .dash-body {
+            display: grid;
+            grid-template-columns: 70px 1fr;
+            min-height: 410px;
+        }
+
+        .dash-side {
+            border-right: 1px solid var(--border);
+            padding: 20px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .side-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+            display: grid;
+            place-items: center;
+            color: #788495;
+            font-size: 16px;
+        }
+
+        .side-icon.active {
+            background: var(--teal-light);
+            color: var(--teal);
+        }
+
+        .dash-content {
+            padding: 25px;
+            background: #fbfcfd;
+        }
+
+        .dash-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .dash-heading h3 {
+            font-size: 20px;
+        }
+
+        .mini-btn {
+            background: var(--teal);
+            color: white;
+            border: 0;
+            border-radius: 9px;
+            padding: 9px 12px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 12px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+        }
+
+        .stat-card small {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .stat-card strong {
+            display: block;
+            font-size: 21px;
+            margin-top: 7px;
+        }
+
+        .product-preview {
+            margin-top: 15px;
+            background: white;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            padding: 15px;
+        }
+
+        .product-preview-title {
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .product-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .product-photo {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: linear-gradient(135deg,#dff7f8,#eef3f6);
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-info strong {
+            display: block;
+            font-size: 11px;
+        }
+
+        .product-info small {
+            color: var(--muted);
+            font-size: 9px;
+        }
+
+        .price {
+            font-weight: 800;
+            font-size: 11px;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: white;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            border-radius: 17px;
+            padding: 15px;
+        }
+
+        .order-card {
+            bottom: 15px;
+            left: -10px;
+            width: 190px;
+        }
+
+        .order-card small {
+            color: var(--muted);
+            font-size: 9px;
+        }
+
+        .order-card strong {
+            display: block;
+            margin-top: 5px;
+            font-size: 13px;
+        }
+
+        .whatsapp-pill {
+            margin-top: 10px;
+            background: #e9fbf1;
+            color: #16884b;
+            padding: 7px;
+            border-radius: 8px;
+            font-size: 9px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .leader-card {
+            top: 45px;
+            right: -10px;
+            width: 185px;
+        }
+
+        .leader-title {
+            font-size: 10px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .leader-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 0;
+            font-size: 9px;
+        }
+
+        .rank {
+            width: 18px;
+            height: 18px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--teal-light);
+            color: var(--teal);
+            font-weight: 800;
+        }
+
+        /* ================= SECTION ================= */
+
+        section {
+            padding: 95px 0;
+        }
+
+        .section-head {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 55px;
+        }
+
+        .eyebrow {
+            color: var(--teal);
+            font-size: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1.7px;
+            margin-bottom: 13px;
+        }
+
+        .section-head h2 {
+            font-size: clamp(32px, 6vw, 50px);
+            line-height: 1.05;
+            letter-spacing: -2px;
+            color: var(--navy);
+        }
+
+        .section-head p {
+            margin-top: 17px;
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* ================= FEATURES ================= */
+
+        .features {
+            background: var(--off-white);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        .feature {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 28px;
+            border-radius: var(--radius);
+            transition: .3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: var(--teal-light);
+            color: var(--teal);
+            font-size: 21px;
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: var(--muted);
+            line-height: 1.65;
+            font-size: 14px;
+        }
+
+        /* ================= HOW IT WORKS ================= */
+
+        .steps {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        .step {
+            padding: 30px;
+            border-radius: var(--radius);
+            background: #fff;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .step-number {
+            font-size: 44px;
+            font-weight: 900;
+            color: #dceff1;
+            line-height: 1;
+        }
+
+        .step h3 {
+            margin-top: 18px;
+            font-size: 19px;
+        }
+
+        .step p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-top: 9px;
+        }
+
+        /* ================= CUSTOMER DEMO ================= */
+
+        .catalog-section {
+            background: var(--navy);
+            color: white;
+            overflow: hidden;
+        }
+
+        .catalog-section .section-head h2 {
+            color: white;
+        }
+
+        .catalog-section .section-head p {
+            color: #aab7c7;
+        }
+
+        .catalog-demo {
+            max-width: 930px;
+            margin: auto;
+            background: #f8fafb;
+            border-radius: 28px;
+            padding: 15px;
+            box-shadow: 0 30px 80px rgba(0,0,0,.3);
+        }
+
+        .store {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            color: var(--text);
+        }
+
+        .store-header {
+            padding: 25px;
+            background:
+                linear-gradient(120deg, #102034, #18354b);
+            color: white;
+        }
+
+        .store-header small {
+            opacity: .65;
+        }
+
+        .store-header h3 {
+            margin-top: 5px;
+            font-size: 26px;
+        }
+
+        .store-header p {
+            opacity: .75;
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+        .store-products {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 12px;
+            padding: 18px;
+        }
+
+        .store-product {
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 10px;
+        }
+
+        .store-img {
+            height: 120px;
+            border-radius: 11px;
+            background: linear-gradient(135deg,#dff7f8,#f0f3f5);
+            display: grid;
+            place-items: center;
+            font-size: 35px;
+        }
+
+        .store-product h4 {
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        .store-product p {
+            color: var(--muted);
+            font-size: 10px;
+            margin-top: 4px;
+        }
+
+        .store-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .store-bottom strong {
+            font-size: 13px;
+        }
+
+        .add {
+            width: 30px;
+            height: 30px;
+            border: 0;
+            border-radius: 8px;
+            background: var(--teal);
+            color: white;
+            font-weight: 900;
+        }
+
+        .cart-bar {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            border-top: 1px solid var(--border);
+        }
+
+        .cart-info strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .cart-info small {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        /* ================= LEADERBOARD ================= */
+
+        .leaderboard {
+            background: var(--off-white);
+        }
+
+        .leaderboard-box {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .leaderboard-head {
+            padding: 22px;
+            background: var(--navy);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .leaderboard-head h3 {
+            font-size: 17px;
+        }
+
+        .leaderboard-head span {
+            font-size: 11px;
+            color: #9dacbe;
+        }
+
+        .leader-row {
+            display: grid;
+            grid-template-columns: 42px 1fr auto;
+            align-items: center;
+            gap: 12px;
+            padding: 17px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .leader-row:last-child {
+            border: 0;
+        }
+
+        .leader-rank {
+            font-weight: 900;
+            font-size: 16px;
+            color: var(--teal);
+        }
+
+        .merchant {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .merchant-avatar {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            background: var(--teal-light);
+            font-weight: 800;
+            color: var(--teal);
+        }
+
+        .merchant strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .merchant small {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .sales {
+            text-align: right;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .sales strong {
+            display: block;
+            color: var(--text);
+        }
+
+        /* ================= PRO ================= */
+
+        .pro {
+            background: white;
+        }
+
+        .pricing {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .price-card {
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            padding: 30px;
+            position: relative;
+        }
+
+        .price-card.featured {
+            background: var(--navy);
+            color: white;
+            border-color: var(--navy);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .popular {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: var(--teal);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 9px;
+            font-weight: 900;
+        }
+
+        .price-card h3 {
+            font-size: 20px;
+        }
+
+        .price-card > p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.5;
+            margin-top: 8px;
+        }
+
+        .featured > p {
+            color: #aab7c7;
+        }
+
+        .price {
+            margin: 25px 0;
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+
+        .price small {
+            font-size: 12px;
+            color: var(--muted);
+            letter-spacing: 0;
+        }
+
+        .price-card ul {
+            list-style: none;
+            display: grid;
+            gap: 13px;
+            margin-bottom: 25px;
+        }
+
+        .price-card li {
+            font-size: 13px;
+            color: #526071;
+        }
+
+        .featured li {
+            color: #d2dce7;
+        }
+
+        .price-card li::before {
+            content: "✓";
+            color: var(--teal);
+            font-weight: 900;
+            margin-right: 9px;
+        }
+
+        .price-card .btn {
+            width: 100%;
+        }
+
+        /* ================= ADS ================= */
+
+        .ad-section {
+            padding: 30px 0;
+            background: var(--off-white);
+        }
+
+        .ad-box {
+            min-height: 90px;
+            border: 1px dashed #cbd5df;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #8a96a5;
+            font-size: 11px;
+            letter-spacing: 1px;
+            background: white;
+        }
+
+        /* ================= CTA ================= */
+
+        .cta {
+            padding: 80px 0;
+        }
+
+        .cta-box {
+            background:
+                radial-gradient(circle at 90% 10%, rgba(9,166,181,.3), transparent 28%),
+                var(--navy);
+            color: white;
+            border-radius: 30px;
+            padding: 55px 25px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .cta-box h2 {
+            font-size: clamp(32px,6vw,53px);
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .cta-box p {
+            max-width: 560px;
+            margin: 18px auto 25px;
+            color: #aeb9c8;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #0b1522;
+            color: white;
+            padding: 55px 0 25px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 35px;
+        }
+
+        .footer-brand img {
+            width: 60px;
+            margin-bottom: 12px;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-brand p {
+            color: #8997a9;
+            font-size: 13px;
+            line-height: 1.6;
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .footer-col a {
+            display: block;
+            color: #8997a9;
+            font-size: 12px;
+            margin: 10px 0;
+        }
+
+        .footer-col a:hover {
+            color: var(--teal);
+        }
+
+        .copyright {
+            margin-top: 45px;
+            padding-top: 20px;
+            border-top: 1px solid #1c2938;
+            color: #6f7d8e;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        /* ================= CART MODAL ================= */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(7,15,25,.65);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: flex-end;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .cart-modal {
+            background: white;
+            width: min(520px,100%);
+            border-radius: 25px 25px 0 0;
+            padding: 25px;
+            animation: cartUp .3s ease;
+        }
+
+        @keyframes cartUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .cart-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close {
+            width: 34px;
+            height: 34px;
+            border: 0;
+            border-radius: 9px;
+            background: #f0f3f5;
+        }
+
+        #cartItems {
+            margin: 20px 0;
+            display: grid;
+            gap: 10px;
+            max-height: 280px;
+            overflow: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            background: #f7f9fa;
+            border-radius: 12px;
+            font-size: 13px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 900;
+            padding: 15px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .whatsapp-order {
+            width: 100%;
+            background: #20c76a;
+            color: white;
+            border: 0;
+            border-radius: 12px;
+            padding: 15px;
+            font-weight: 800;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (min-width: 700px) {
+
+            .container {
+                width: min(1160px, calc(100% - 60px));
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .steps {
+                grid-template-columns: repeat(3,1fr);
+            }
+
+            .store-products {
+                grid-template-columns: repeat(4,1fr);
+            }
+
+            .pricing {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+            }
+
+            .modal {
+                align-items: center;
+            }
+
+            .cart-modal {
+                border-radius: 25px;
+            }
+        }
+
+        @media (min-width: 950px) {
+
+            .nav-links {
+                display: flex;
+            }
+
+            .nav-actions {
+                display: flex;
+            }
+
+            .menu-btn {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 150px;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1.02fr .98fr;
+                gap: 55px;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(3,1fr);
+            }
+
+            .hero-visual {
+                min-height: 520px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .hero h1 {
+                letter-spacing: -2.5px;
+            }
+
+            .dashboard {
+                transform: none;
+            }
+
+            .hero-visual {
+                min-height: 420px;
+            }
+
+            .dash-body {
+                grid-template-columns: 55px 1fr;
+            }
+
+            .dash-content {
+                padding: 15px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-card {
+                padding: 10px;
+            }
+
+            .leader-card {
+                right: -4px;
+                top: 15px;
+                transform: scale(.85);
+                transform-origin: top right;
+            }
+
+            .order-card {
+                left: -4px;
+                bottom: 5px;
+                transform: scale(.85);
+                transform-origin: bottom left;
+            }
+
+            .store-img {
+                height: 95px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header id="header">
+
+    <div class="container nav">
+
+        <a href="#" class="logo">
+            <img src="bizicat-logo.png" alt="BIZICAT logo">
+            <span>BIZICAT</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#how">How It Works</a>
+            <a href="#leaderboard">Leaderboard</a>
+            <a href="#pricing">Pro</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a href="#pricing" class="btn btn-outline">Log In</a>
+            <a href="#start" class="btn btn-teal">Create Catalog</a>
+        </div>
+
+        <button class="menu-btn" id="menuBtn">
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+<!-- MOBILE MENU -->
+
+<div class="mobile-menu" id="mobileMenu">
+
+    <a href="#features">Features</a>
+    <a href="#how">How It Works</a>
+    <a href="#leaderboard">Leaderboard</a>
+    <a href="#pricing">Pro Version</a>
+
+    <a href="#start" class="btn btn-teal">
+        Create Your Catalog
+    </a>
+
+</div>
+
+
+<!-- ================= HERO ================= -->
+
+<main>
+
+<section class="hero" id="start">
+
+    <div class="container hero-grid">
+
+        <div>
+
+            <div class="badge">
+                <span class="badge-dot"></span>
+                BUILT FOR LOCAL BUSINESSES
+            </div>
+
+            <h1>
+                Turn your products into a
+                <span>business.</span>
+            </h1>
+
+            <p class="hero-text">
+                Create a beautiful digital catalog, let customers build their
+                cart and send the order directly to you through WhatsApp.
+                No complicated checkout. No marketplace commission.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#pricing" class="btn btn-teal">
+                    Create Your Free Catalog →
+                </a>
+
+                <a href="#how" class="btn btn-outline">
+                    See How It Works
+                </a>
+
+            </div>
+
+            <div class="trust">
+
+                <span>✓ No coding</span>
+                <span>✓ WhatsApp orders</span>
+                <span>✓ Direct payments</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- DASHBOARD MOCKUP -->
+
+        <div class="hero-visual">
+
+            <div class="dashboard">
+
+                <div class="dash-top">
+
+                    <div class="dash-brand">
+
+                        <img src="bizicat-logo.png" alt="BIZICAT">
+
+                        My Business
+
+                    </div>
+
+                    <div class="dash-profile"></div>
+
+                </div>
+
+                <div class="dash-body">
+
+                    <aside class="dash-side">
+
+                        <div class="side-icon active">⌂</div>
+                        <div class="side-icon">▦</div>
+                        <div class="side-icon">🛒</div>
+                        <div class="side-icon">♧</div>
+                        <div class="side-icon">⚙</div>
+
+                    </aside>
+
+                    <div class="dash-content">
+
+                        <div class="dash-heading">
+
+                            <h3>Overview</h3>
+
+                            <button class="mini-btn">
+                                + Product
+                            </button>
+
+                        </div>
+
+                        <div class="stats">
+
+                            <div class="stat-card">
+                                <small>Catalog Views</small>
+                                <strong>2,481</strong>
+                            </div>
+
+                            <div class="stat-card">
+                                <small>Orders</small>
+                                <strong>186</strong>
+                            </div>
+
+                            <div class="stat-card">
+                                <small>Products</small>
+                                <strong>42</strong>
+                            </div>
+
+                        </div>
+
+                        <div class="product-preview">
+
+                            <div class="product-preview-title">
+                                Popular Products
+                            </div>
+
+                            <div class="product-row">
+
+                                <div class="product-photo"></div>
+
+                                <div class="product-info">
+                                    <strong>Signature Product</strong>
+                                    <small>128 orders</small>
+                                </div>
+
+                                <div class="price">
+                                    $24.00
+                                </div>
+
+                            </div>
+
+                            <div class="product-row">
+
+                                <div class="product-photo"></div>
+
+                                <div class="product-info">
+                                    <strong>Premium Collection</strong>
+                                    <small>94 orders</small>
+                                </div>
+
+                                <div class="price">
+                                    $35.00
+                                </div>
+
+                            </div>
+
+                            <div class="product-row">
+
+                                <div class="product-photo"></div>
+
+                                <div class="product-info">
+                                    <strong>Best Seller</strong>
+                                    <small>76 orders</small>
+                                </div>
+
+                                <div class="price">
+                                    $18.00
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="floating-card leader-card">
+
+                <div class="leader-title">
+                    🏆 BEST SELLERS
+                </div>
+
+                <div class="leader-item">
+                    <span class="rank">1</span>
+                    Signature Product
+                </div>
+
+                <div class="leader-item">
+                    <span class="rank">2</span>
+                    Premium Collection
+                </div>
+
+                <div class="leader-item">
+                    <span class="rank">3</span>
+                    Classic Pack
+                </div>
+
+            </div>
+
+
+            <div class="floating-card order-card">
+
+                <small>NEW ORDER</small>
+
+                <strong>
+                    4 products · $86.00
+                </strong>
+
+                <div class="whatsapp-pill">
+                    ✓ Sent via WhatsApp
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= AD SPACE ================= -->
+
+<section class="ad-section">
+
+    <div class="container">
+
+        <div class="ad-box">
+            ADVERTISEMENT · YOUR BUSINESS COULD APPEAR HERE
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="features" id="features">
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div class="eyebrow">
+                ONE PLATFORM
+            </div>
+
+            <h2>
+                Everything your catalog needs.
+            </h2>
+
+            <p>
+                BIZICAT gives local merchants the essential tools to
+                showcase products, receive orders and get discovered.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <div class="feature">
+
+                <div class="feature-icon">▦</div>
+
+                <h3>Digital Catalog</h3>
+
+                <p>
+                    Build a professional online catalog for your products,
+                    services, prices and offers without writing code.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">🛒</div>
+
+                <h3>Smart Cart</h3>
+
+                <p>
+                    Customers can browse your catalog, choose quantities
+                    and create their complete order before contacting you.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">💬</div>
+
+                <h3>WhatsApp Ordering</h3>
+
+                <p>
+                    The customer's order is automatically formatted and
+                    sent directly to your WhatsApp.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">📈</div>
+
+                <h3>Business Insights</h3>
+
+                <p>
+                    Understand which products attract attention and discover
+                    which products are becoming your best sellers.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">🏆</div>
+
+                <h3>Best-Seller Leaderboard</h3>
+
+                <p>
+                    Your popular products can appear on the public
+                    BIZICAT leaderboard and attract new customers.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">📢</div>
+
+                <h3>Business Promotion</h3>
+
+                <p>
+                    Promote your business through BIZICAT discovery,
+                    advertising opportunities and featured placements.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section id="how">
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div class="eyebrow">
+                SIMPLE PROCESS
+            </div>
+
+            <h2>
+                From product to order in seconds.
+            </h2>
+
+            <p>
+                BIZICAT removes the complicated parts of online selling.
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="step-number">01</div>
+
+                <h3>Create your catalog</h3>
+
+                <p>
+                    Add your products, photos, descriptions and prices
+                    to create your own digital storefront.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">02</div>
+
+                <h3>Customers add to cart</h3>
+
+                <p>
+                    Customers browse your catalog and add everything
+                    they want to purchase to their cart.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">03</div>
+
+                <h3>Order on WhatsApp</h3>
+
+                <p>
+                    One click sends a clean order summary directly
+                    to the merchant's WhatsApp.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CUSTOMER CATALOG ================= -->
+
+<section class="catalog-section">
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div class="eyebrow">
+                CUSTOMER EXPERIENCE
+            </div>
+
+            <h2>
+                A storefront customers actually enjoy using.
+            </h2>
+
+            <p>
+                Fast, simple and designed for mobile shopping.
+            </p>
+
+        </div>
+
+
+        <div class="catalog-demo">
+
+            <div class="store">
+
+                <div class="store-header">
+
+                    <small>BIZICAT CATALOG</small>
+
+                    <h3>Urban Kitchen</h3>
+
+                    <p>
+                        Fresh products · Local delivery · WhatsApp orders
+                    </p>
+
+                </div>
+
+
+                <div class="store-products">
+
+                    <div class="store-product">
+
+                        <div class="store-img">
+                            🍔
+                        </div>
+
+                        <h4>Signature Burger</h4>
+
+                        <p>Fresh & delicious</p>
+
+                        <div class="store-bottom">
+
+                            <strong>$8.50</strong>
+
+                            <button
+                                class="add"
+                                onclick="addToCart('Signature Burger',8.5)">
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="store-product">
+
+                        <div class="store-img">
+                            🍕
+                        </div>
+
+                        <h4>Classic Pizza</h4>
+
+                        <p>Freshly baked</p>
+
+                        <div class="store-bottom">
+
+                            <strong>$12.00</strong>
+
+                            <button
+                                class="add"
+                                onclick="addToCart('Classic Pizza',12)">
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="store-product">
+
+                        <div class="store-img">
+                            🥗
+                        </div>
+
+                        <h4>Fresh Bowl</h4>
+
+                        <p>Healthy choice</p>
+
+                        <div class="store-bottom">
+
+                            <strong>$7.50</strong>
+
+                            <button
+                                class="add"
+                                onclick="addToCart('Fresh Bowl',7.5)">
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="store-product">
+
+                        <div class="store-img">
+                            🥤
+                        </div>
+
+                        <h4>Fresh Drink</h4>
+
+                        <p>Made daily</p>
+
+                        <div class="store-bottom">
+
+                            <strong>$4.00</strong>
+
+                            <button
+                                class="add"
+                                onclick="addToCart('Fresh Drink',4)">
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="cart-bar">
+
+                    <div class="cart-info">
+
+                        <strong id="cartCount">
+                            Cart is empty
+                        </strong>
+
+                        <small>
+                            Add products to continue
+                        </small>
+
+                    </div>
+
+                    <button
+                        class="btn btn-teal"
+                        onclick="openCart()">
+                        View Cart →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= LEADERBOARD ================= -->
+
+<section class="leaderboard" id="leaderboard">
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div class="eyebrow">
+                DISCOVER & GROW
+            </div>
+
+            <h2>
+                Who's selling the best?
+            </h2>
+
+            <p>
+                The BIZICAT Best-Selling Items Leaderboard gives
+                customers another reason to discover local businesses.
+            </p>
+
+        </div>
+
+
+        <div class="leaderboard-box">
+
+            <div class="leaderboard-head">
+
+                <h3>🏆 Best-Selling Items</h3>
+
+                <span>This Week</span>
+
+            </div>
+
+
+            <div class="leader-row">
+
+                <div class="leader-rank">01</div>
+
+                <div class="merchant">
+
+                    <div class="merchant-avatar">U</div>
+
+                    <div>
+                        <strong>Signature Burger</strong>
+                        <small>Urban Kitchen</small>
+                    </div>
+
+                </div>
+
+                <div class="sales">
+                    <strong>428 sold</strong>
+                    Trending ↑
+                </div>
+
+            </div>
+
+
+            <div class="leader-row">
+
+                <div class="leader-rank">02</div>
+
+                <div class="merchant">
+
+                    <div class="merchant-avatar">C</div>
+
+                    <div>
+                        <strong>Classic Pizza</strong>
+                        <small>City Bites</small>
+                    </div>
+
+                </div>
+
+                <div class="sales">
+                    <strong>381 sold</strong>
+                    Trending ↑
+                </div>
+
+            </div>
+
+
+            <div class="leader-row">
+
+                <div class="leader-rank">03</div>
+
+                <div class="merchant">
+
+                    <div class="merchant-avatar">F</div>
+
+                    <div>
+                        <strong>Family Meal Box</strong>
+                        <small>Fresh Corner</small>
+                    </div>
+
+                </div>
+
+                <div class="sales">
+                    <strong>327 sold</strong>
+                    Popular
+                </div>
+
+            </div>
+
+
+            <div class="leader-row">
+
+                <div class="leader-rank">04</div>
+
+                <div class="merchant">
+
+                    <div class="merchant-avatar">S</div>
+
+                    <div>
+                        <strong>Premium Gift Box</strong>
+                        <small>Sweet Studio</small>
+                    </div>
+
+                </div>
+
+                <div class="sales">
+                    <strong>295 sold</strong>
+                    Trending
+                </div>
+
+            </div>
+
+
+            <div class="leader-row">
+
+                <div class="leader-rank">05</div>
+
+                <div class="merchant">
+
+                    <div class="merchant-avatar">N</div>
+
+                    <div>
+                        <strong>Signature Collection</strong>
+                        <small>Nova Store</small>
+                    </div>
+
+                </div>
+
+                <div class="sales">
+                    <strong>271 sold</strong>
+                    Popular
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PRICING ================= -->
+
+<section class="pro" id="pricing">
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div class="eyebrow">
+                PRO VERSION
+            </div>
+
+            <h2>
+                Start free. Grow when you're ready.
+            </h2>
+
+            <p>
+                Give every local business the tools to get online,
+                then unlock powerful growth features with Pro.
+            </p>
+
+        </div>
+
+
+        <div class="pricing">
+
+            <div class="price-card">
+
+                <h3>Free</h3>
+
+                <p>
+                    Everything you need to start your digital catalog.
+                </p>
+
+                <div class="price">
+                    $0
+                    <small>/ forever</small>
+                </div>
+
+                <ul>
+
+                    <li>Digital product catalog</li>
+                    <li>Product listings</li>
+                    <li>Customer cart</li>
+                    <li>WhatsApp ordering</li>
+                    <li>Basic business profile</li>
+
+                </ul>
+
+                <button class="btn btn-outline">
+                    Start Free
+                </button>
+
+            </div>
+
+
+            <div class="price-card featured">
+
+                <div class="popular">
+                    MOST POPULAR
+                </div>
+
+                <h3>Pro</h3>
+
+                <p>
+                    Advanced tools for businesses ready to grow.
+                </p>
+
+                <div class="price">
+                    $9
+                    <small>/ month</small>
+                </div>
+
+                <ul>
+
+                    <li>Everything in Free</li>
+                    <li>Advanced analytics</li>
+                    <li>Featured leaderboard placement</li>
+                    <li>Priority discovery</li>
+                    <li>More catalog customization</li>
+                    <li>Remove platform ads</li>
+                    <li>Premium business profile</li>
+
+                </ul>
+
+                <button class="btn btn-teal">
+                    Upgrade to Pro
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ADVERTISEMENT ================= -->
+
+<section class="ad-section">
+
+    <div class="container">
+
+        <div class="ad-box">
+            PREMIUM AD SPACE · REACH LOCAL CUSTOMERS
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+    <div class="container">
+
+        <div class="cta-box">
+
+            <h2>
+                Your products deserve<br>
+                to be discovered.
+            </h2>
+
+            <p>
+                Create your BIZICAT catalog and give customers
+                a faster way to discover your products and order
+                directly from your business.
+            </p>
+
+            <a href="#pricing" class="btn btn-teal">
+                Create Your Catalog →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div class="footer-brand">
+
+                <img src="bizicat-logo.png" alt="BIZICAT">
+
+                <p>
+                    Digital catalogs that help local businesses
+                    get discovered, connect with customers and grow.
+                </p>
+
+            </div>
+
+
+            <div class="footer-col">
+
+                <h4>Platform</h4>
+
+                <a href="#features">Features</a>
+                <a href="#how">How It Works</a>
+                <a href="#leaderboard">Leaderboard</a>
+                <a href="#pricing">Pro Version</a>
+
+            </div>
+
+
+            <div class="footer-col">
+
+                <h4>Businesses</h4>
+
+                <a href="#start">Create Catalog</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#">Business Login</a>
+                <a href="#">Help Center</a>
+
+            </div>
+
+
+            <div class="footer-col">
+
+                <h4>Company</h4>
+
+                <a href="#">About BIZICAT</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 BIZICAT. Digital catalogs that grow your business.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- ================= CART MODAL ================= -->
+
+<div class="modal" id="cartModal">
+
+    <div class="cart-modal">
+
+        <div class="cart-title">
+
+            <h3>Your Order</h3>
+
+            <button class="close" onclick="closeCart()">
+                ✕
+            </button>
+
+        </div>
+
+
+        <div id="cartItems">
+
+            <p style="color:#718096;font-size:13px;">
+                Your cart is empty.
+            </p>
+
+        </div>
+
+
+        <div class="cart-total">
+
+            <span>Total</span>
+
+            <span id="cartTotal">
+                $0.00
+            </span>
+
+        </div>
+
+
+        <button
+            class="whatsapp-order"
+            onclick="sendWhatsAppOrder()">
+
+            💬 Order Now via WhatsApp
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* ================= HEADER ================= */
+
+    const header = document.getElementById("header");
+
+    window.addEventListener("scroll", () => {
+
+        if (window.scrollY > 30) {
+            header.classList.add("scrolled");
+        } else {
+            header.classList.remove("scrolled");
+        }
+
+    });
+
+
+    /* ================= MOBILE MENU ================= */
+
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuBtn.addEventListener("click", () => {
+
+        mobileMenu.classList.toggle("active");
+
+    });
+
+
+    document.querySelectorAll(".mobile-menu a").forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            mobileMenu.classList.remove("active");
+
+        });
+
+    });
+
+
+    /* ================= CART ================= */
+
+    let cart = [];
+
+    function addToCart(name, price) {
+
+        cart.push({
+            name: name,
+            price: price
+        });
+
+        updateCart();
+
+    }
+
+
+    function updateCart() {
+
+        const count = cart.length;
+
+        const cartCount = document.getElementById("cartCount");
+
+        if (count === 0) {
+
+            cartCount.innerText = "Cart is empty";
+
+        } else {
+
+            cartCount.innerText =
+                count + (count === 1 ? " item" : " items") +
+                " in cart";
+
+        }
+
+    }
+
+
+    function openCart() {
+
+        const modal = document.getElementById("cartModal");
+
+        const items = document.getElementById("cartItems");
+
+        const totalElement = document.getElementById("cartTotal");
+
+        if (cart.length === 0) {
+
+            items.innerHTML = `
+                <p style="color:#718096;font-size:13px;">
+                    Your cart is empty. Add some products first.
+                </p>
+            `;
+
+            totalElement.innerText = "$0.00";
+
+        } else {
+
+            let total = 0;
+
+            items.innerHTML = "";
+
+            cart.forEach((item, index) => {
+
+                total += item.price;
+
+                items.innerHTML += `
+
+                    <div class="cart-item">
+
+                        <span>
+                            ${index + 1}. ${item.name}
+                        </span>
+
+                        <strong>
+                            $${item.price.toFixed(2)}
+                        </strong>
+
+                    </div>
+
+                `;
+
+            });
+
+            totalElement.innerText =
+                "$" + total.toFixed(2);
+
+        }
+
+        modal.classList.add("active");
+
+    }
+
+
+    function closeCart() {
+
+        document
+            .getElementById("cartModal")
+            .classList.remove("active");
+
+    }
+
+
+    /* ================= WHATSAPP ================= */
+
+    function sendWhatsAppOrder() {
+
+        if (cart.length === 0) {
+
+            alert("Please add products to your cart first.");
+
+            return;
+
+        }
+
+        let message =
+            "Hello! I would like to place an order:%0A%0A";
+
+        let total = 0;
+
+        cart.forEach((item, index) => {
+
+            message +=
+                `${index + 1}. ${item.name} - $${item.price.toFixed(2)}%0A`;
+
+            total += item.price;
+
+        });
+
+        message +=
+            `%0ATotal: $${total.toFixed(2)}`;
+
+        /*
+            Replace this number with the merchant's
+            actual WhatsApp number.
+
+            Example:
+            94771234567
+        */
+
+        const merchantNumber = "94770000000";
+
+        const url =
+            "https://wa.me/" +
+            merchantNumber +
+            "?text=" +
+            message;
+
+        window.open(url, "_blank");
+
+    }
+
+
+    /* ================= CLOSE MODAL ================= */
+
+    document
+        .getElementById("cartModal")
+        .addEventListener("click", function(e) {
+
+            if (e.target === this) {
+                closeCart();
+            }
+
+        });
+
+</script>
+
+
+<!-- ================= SEO STRUCTURED DATA ================= -->
+
+<script type="application/ld+json">
+
+{
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "BIZICAT",
+    "applicationCategory": "BusinessApplication",
+    "description": "BIZICAT is a digital catalog platform that helps local businesses showcase products, receive WhatsApp orders and grow through customer discovery.",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    }
+}
+
+</script>
+
+</body>
+</html>
