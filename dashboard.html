@@ -1,0 +1,4043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BIZICAT Merchant Dashboard</title>
+
+    <meta name="description"
+          content="Manage your BIZICAT business profile, products and digital catalog.">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+<style>
+
+/* =====================================================
+   ROOT
+===================================================== */
+
+:root {
+
+    --navy: #101c2c;
+    --navy-light: #1c2c40;
+
+    --teal: #08a6b5;
+    --teal-dark: #078b98;
+
+    --background: #f4f7f9;
+
+    --white: #ffffff;
+
+    --text: #152235;
+    --muted: #728093;
+
+    --border: #e3e9ee;
+
+    --success: #1da866;
+    --danger: #e64c52;
+    --warning: #f0a52b;
+
+    --sidebar-width: 260px;
+
+    --radius: 18px;
+
+    --shadow:
+        0 15px 45px
+        rgba(16,28,44,.08);
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+
+    font-family: "Inter", sans-serif;
+
+    background: var(--background);
+
+    color: var(--text);
+
+    min-height: 100vh;
+
+}
+
+
+button,
+input,
+textarea,
+select {
+
+    font-family: inherit;
+
+}
+
+
+button {
+
+    cursor: pointer;
+
+}
+
+
+/* =====================================================
+   APP
+===================================================== */
+
+.app {
+
+    display: flex;
+
+    min-height: 100vh;
+
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar {
+
+    width: var(--sidebar-width);
+
+    background: var(--navy);
+
+    color: white;
+
+    position: fixed;
+
+    height: 100vh;
+
+    left: 0;
+    top: 0;
+
+    padding: 24px 16px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    z-index: 100;
+
+    transition: .3s;
+
+}
+
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 5px 10px 28px;
+
+}
+
+
+.brand img {
+
+    width: 46px;
+    height: 46px;
+
+    object-fit: contain;
+
+    background: white;
+
+    border-radius: 12px;
+
+}
+
+
+.brand-name {
+
+    font-size: 22px;
+
+    font-weight: 900;
+
+    letter-spacing: -1px;
+
+}
+
+
+.brand-name span {
+
+    color: var(--teal);
+
+}
+
+
+/* =====================================================
+   MERCHANT
+===================================================== */
+
+.merchant-card {
+
+    background:
+        rgba(255,255,255,.06);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    padding: 14px;
+
+    border-radius: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.merchant-avatar {
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 12px;
+
+    background: var(--teal);
+
+    display: grid;
+
+    place-items: center;
+
+    font-weight: 800;
+
+}
+
+
+.merchant-info {
+
+    overflow: hidden;
+
+}
+
+
+.merchant-info strong {
+
+    display: block;
+
+    font-size: 13px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+}
+
+
+.merchant-info span {
+
+    font-size: 11px;
+
+    color: #9ba9b7;
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.nav {
+
+    display: grid;
+
+    gap: 6px;
+
+}
+
+
+.nav button {
+
+    border: none;
+
+    background: transparent;
+
+    color: #9eacba;
+
+    padding: 13px 14px;
+
+    border-radius: 12px;
+
+    text-align: left;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    transition: .25s;
+
+}
+
+
+.nav button:hover {
+
+    background:
+        rgba(255,255,255,.06);
+
+    color: white;
+
+}
+
+
+.nav button.active {
+
+    background:
+        rgba(8,166,181,.16);
+
+    color: white;
+
+}
+
+
+.nav-icon {
+
+    font-size: 18px;
+
+    width: 22px;
+
+}
+
+
+/* =====================================================
+   SIDEBAR BOTTOM
+===================================================== */
+
+.sidebar-bottom {
+
+    margin-top: auto;
+
+}
+
+
+.logout-btn {
+
+    width: 100%;
+
+    background:
+        rgba(255,255,255,.05);
+
+    border: none;
+
+    color: #aab5c0;
+
+    padding: 13px;
+
+    border-radius: 12px;
+
+    font-weight: 600;
+
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main {
+
+    margin-left: var(--sidebar-width);
+
+    width: calc(100% - var(--sidebar-width));
+
+    min-height: 100vh;
+
+}
+
+
+/* =====================================================
+   TOPBAR
+===================================================== */
+
+.topbar {
+
+    height: 80px;
+
+    background: white;
+
+    border-bottom:
+        1px solid var(--border);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 35px;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 50;
+
+}
+
+
+.topbar-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+}
+
+
+.menu-btn {
+
+    display: none;
+
+    border: none;
+
+    background: #f1f4f6;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 10px;
+
+}
+
+
+.page-title {
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    color: var(--navy);
+
+}
+
+
+.topbar-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+}
+
+
+.status {
+
+    padding: 8px 12px;
+
+    border-radius: 50px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+.status.published {
+
+    background: #e9f9ef;
+
+    color: var(--success);
+
+}
+
+
+.status.draft {
+
+    background: #fff5df;
+
+    color: var(--warning);
+
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content {
+
+    padding: 35px;
+
+    max-width: 1500px;
+
+    margin: auto;
+
+}
+
+
+.page {
+
+    display: none;
+
+}
+
+
+.page.active {
+
+    display: block;
+
+    animation: fadeIn .35s ease;
+
+}
+
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+        transform: translateY(10px);
+
+    }
+
+    to {
+
+        opacity: 1;
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* =====================================================
+   WELCOME
+===================================================== */
+
+.welcome {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+
+}
+
+
+.welcome h1 {
+
+    font-size: 28px;
+
+    letter-spacing: -1.2px;
+
+    color: var(--navy);
+
+}
+
+
+.welcome p {
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    margin-top: 7px;
+
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.btn {
+
+    border: none;
+
+    padding: 13px 18px;
+
+    border-radius: 12px;
+
+    font-weight: 700;
+
+    font-size: 12px;
+
+    transition: .25s;
+
+}
+
+
+.btn-primary {
+
+    background: var(--navy);
+
+    color: white;
+
+}
+
+
+.btn-primary:hover {
+
+    transform: translateY(-2px);
+
+    background: var(--navy-light);
+
+}
+
+
+.btn-teal {
+
+    background: var(--teal);
+
+    color: white;
+
+}
+
+
+.btn-teal:hover {
+
+    transform: translateY(-2px);
+
+    background: var(--teal-dark);
+
+}
+
+
+.btn-light {
+
+    background: #eef2f4;
+
+    color: var(--navy);
+
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 28px;
+
+}
+
+
+.stat-card {
+
+    background: white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    padding: 22px;
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.stat-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.stat-label {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+}
+
+
+.stat-icon {
+
+    width: 40px;
+    height: 40px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 12px;
+
+    background: #edf9fa;
+
+    font-size: 18px;
+
+}
+
+
+.stat-number {
+
+    margin-top: 18px;
+
+    font-size: 28px;
+
+    font-weight: 900;
+
+    color: var(--navy);
+
+}
+
+
+/* =====================================================
+   GRID
+===================================================== */
+
+.dashboard-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1.3fr .7fr;
+
+    gap: 20px;
+
+}
+
+
+.card {
+
+    background: white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    padding: 24px;
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.card-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+
+.card-header h3 {
+
+    font-size: 16px;
+
+    color: var(--navy);
+
+}
+
+
+/* =====================================================
+   QUICK ACTIONS
+===================================================== */
+
+.quick-actions {
+
+    display: grid;
+
+    gap: 12px;
+
+}
+
+
+.quick-action {
+
+    border:
+        1px solid var(--border);
+
+    background: white;
+
+    padding: 16px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    text-align: left;
+
+}
+
+
+.quick-icon {
+
+    width: 42px;
+    height: 42px;
+
+    background: #edf9fa;
+
+    border-radius: 12px;
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 18px;
+
+}
+
+
+.quick-action strong {
+
+    display: block;
+
+    font-size: 13px;
+
+}
+
+
+.quick-action span {
+
+    font-size: 11px;
+
+    color: var(--muted);
+
+}
+
+
+/* =====================================================
+   FORMS
+===================================================== */
+
+.form-card {
+
+    max-width: 900px;
+
+}
+
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+
+}
+
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+.form-group.full {
+
+    grid-column: 1 / -1;
+
+}
+
+
+label {
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    color: #3b4757;
+
+}
+
+
+input,
+textarea,
+select {
+
+    width: 100%;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 12px;
+
+    padding: 13px 14px;
+
+    font-size: 13px;
+
+    outline: none;
+
+    color: var(--text);
+
+    background: white;
+
+    transition: .2s;
+
+}
+
+
+textarea {
+
+    min-height: 120px;
+
+    resize: vertical;
+
+}
+
+
+input:focus,
+textarea:focus,
+select:focus {
+
+    border-color: var(--teal);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(8,166,181,.10);
+
+}
+
+
+.form-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin-top: 25px;
+
+}
+
+
+/* =====================================================
+   IMAGE UPLOAD
+===================================================== */
+
+.upload-area {
+
+    border:
+        2px dashed #cfdbe1;
+
+    border-radius: 16px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    background: #fafcfd;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+
+.upload-area:hover {
+
+    border-color: var(--teal);
+
+    background: #f1fbfc;
+
+}
+
+
+.upload-icon {
+
+    font-size: 35px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.upload-area strong {
+
+    display: block;
+
+    font-size: 13px;
+
+}
+
+
+.upload-area span {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+
+.image-preview {
+
+    margin-top: 15px;
+
+    display: none;
+
+    max-width: 160px;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+}
+
+
+.image-preview img {
+
+    width: 100%;
+
+    display: block;
+
+}
+
+
+/* =====================================================
+   PRODUCTS
+===================================================== */
+
+.products-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+
+}
+
+
+.products-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+}
+
+
+.product-card {
+
+    background: white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.product-image {
+
+    width: 100%;
+
+    height: 190px;
+
+    background: #eef3f5;
+
+    overflow: hidden;
+
+}
+
+
+.product-image img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+
+.no-image {
+
+    height: 100%;
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 45px;
+
+}
+
+
+.product-content {
+
+    padding: 17px;
+
+}
+
+
+.product-name {
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    margin-bottom: 7px;
+
+}
+
+
+.product-price {
+
+    color: var(--teal);
+
+    font-weight: 900;
+
+    font-size: 16px;
+
+}
+
+
+.product-category {
+
+    display: inline-block;
+
+    margin-top: 10px;
+
+    padding: 5px 9px;
+
+    border-radius: 50px;
+
+    background: #f0f5f6;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+}
+
+
+.product-actions {
+
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 15px;
+
+}
+
+
+.small-btn {
+
+    flex: 1;
+
+    border: none;
+
+    padding: 9px;
+
+    border-radius: 9px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+.edit-btn {
+
+    background: #edf9fa;
+
+    color: var(--teal-dark);
+
+}
+
+
+.delete-btn {
+
+    background: #fff0f0;
+
+    color: var(--danger);
+
+}
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.empty-state {
+
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 60px 20px;
+
+    background: white;
+
+    border-radius: var(--radius);
+
+    border:
+        1px dashed var(--border);
+
+}
+
+
+.empty-state div {
+
+    font-size: 50px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.empty-state h3 {
+
+    font-size: 17px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.empty-state p {
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+}
+
+
+/* =====================================================
+   CATALOG
+===================================================== */
+
+.catalog-status {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 20px;
+
+}
+
+
+.publish-card {
+
+    background: white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    padding: 28px;
+
+}
+
+
+.publish-icon {
+
+    width: 55px;
+    height: 55px;
+
+    background: #edf9fa;
+
+    border-radius: 16px;
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 25px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.publish-card h2 {
+
+    font-size: 20px;
+
+    color: var(--navy);
+
+}
+
+
+.publish-card p {
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin: 10px 0 22px;
+
+}
+
+
+/* =====================================================
+   CATALOG LINK
+===================================================== */
+
+.catalog-link-box {
+
+    margin-top: 20px;
+
+    background: #f5fafb;
+
+    border:
+        1px solid #d8edf0;
+
+    border-radius: 14px;
+
+    padding: 15px;
+
+}
+
+
+.catalog-link {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 10px;
+
+}
+
+
+.catalog-link input {
+
+    background: white;
+
+    font-size: 11px;
+
+}
+
+
+.copy-btn {
+
+    border: none;
+
+    background: var(--teal);
+
+    color: white;
+
+    padding: 13px;
+
+    border-radius: 10px;
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(9,18,29,.65);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 500;
+
+}
+
+
+.modal.active {
+
+    display: flex;
+
+}
+
+
+.modal-content {
+
+    background: white;
+
+    width: 100%;
+
+    max-width: 700px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    border-radius: 22px;
+
+    padding: 25px;
+
+}
+
+
+.modal-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+
+}
+
+
+.close-modal {
+
+    border: none;
+
+    background: #f1f4f6;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 10px;
+
+    font-size: 18px;
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast {
+
+    position: fixed;
+
+    right: 25px;
+
+    bottom: 25px;
+
+    background: var(--navy);
+
+    color: white;
+
+    padding: 15px 20px;
+
+    border-radius: 12px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    pointer-events: none;
+
+    transition: .3s;
+
+    z-index: 1000;
+
+}
+
+
+.toast.show {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width: 1000px) {
+
+    .stats-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+    .products-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media(max-width: 800px) {
+
+    .sidebar {
+
+        transform: translateX(-100%);
+
+    }
+
+    .sidebar.open {
+
+        transform: translateX(0);
+
+    }
+
+    .main {
+
+        margin-left: 0;
+
+        width: 100%;
+
+    }
+
+    .menu-btn {
+
+        display: block;
+
+    }
+
+    .topbar {
+
+        padding: 0 18px;
+
+    }
+
+    .content {
+
+        padding: 22px 16px;
+
+    }
+
+    .dashboard-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .catalog-status {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media(max-width: 550px) {
+
+    .welcome {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 18px;
+
+    }
+
+    .stats-grid {
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 10px;
+
+    }
+
+    .stat-card {
+
+        padding: 15px;
+
+    }
+
+    .stat-number {
+
+        font-size: 22px;
+
+    }
+
+    .products-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .form-group.full {
+
+        grid-column: auto;
+
+    }
+
+    .products-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar" id="sidebar">
+
+
+    <div class="brand">
+
+        <img src="bizicat-logo.png"
+             alt="BIZICAT">
+
+        <div class="brand-name">
+            BIZI<span>CAT</span>
+        </div>
+
+    </div>
+
+
+    <div class="merchant-card">
+
+        <div class="merchant-avatar"
+             id="merchantAvatar">
+
+            B
+
+        </div>
+
+        <div class="merchant-info">
+
+            <strong id="sidebarBusinessName">
+                My Business
+            </strong>
+
+            <span>
+                BIZICAT Merchant
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <nav class="nav">
+
+        <button class="active"
+                onclick="showPage('dashboard', this)">
+
+            <span class="nav-icon">⌂</span>
+
+            Dashboard
+
+        </button>
+
+
+        <button onclick="showPage('business', this)">
+
+            <span class="nav-icon">🏪</span>
+
+            Business Profile
+
+        </button>
+
+
+        <button onclick="showPage('products', this)">
+
+            <span class="nav-icon">▦</span>
+
+            My Products
+
+        </button>
+
+
+        <button onclick="showPage('catalog', this)">
+
+            <span class="nav-icon">🚀</span>
+
+            Publish Catalog
+
+        </button>
+
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <button class="logout-btn"
+                onclick="logout()">
+
+            ← Log Out
+
+        </button>
+
+    </div>
+
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+<!-- =====================================================
+     TOPBAR
+===================================================== -->
+
+<header class="topbar">
+
+    <div class="topbar-left">
+
+        <button class="menu-btn"
+                onclick="toggleSidebar()">
+
+            ☰
+
+        </button>
+
+        <div class="page-title"
+             id="pageTitle">
+
+            Dashboard
+
+        </div>
+
+    </div>
+
+
+    <div class="topbar-right">
+
+        <div class="status draft"
+             id="catalogStatus">
+
+            ● Draft
+
+        </div>
+
+    </div>
+
+
+</header>
+
+
+
+<div class="content">
+
+
+<!-- =====================================================
+     DASHBOARD PAGE
+===================================================== -->
+
+<section class="page active"
+         id="dashboardPage">
+
+
+    <div class="welcome">
+
+        <div>
+
+            <h1>
+                Welcome back 👋
+            </h1>
+
+            <p>
+                Manage your business and grow your catalog with BIZICAT.
+            </p>
+
+        </div>
+
+
+        <button class="btn btn-teal"
+                onclick="showPageByName('products')">
+
+            + Add Product
+
+        </button>
+
+    </div>
+
+
+
+    <!-- STATS -->
+
+    <div class="stats-grid">
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <span class="stat-label">
+                    Total Products
+                </span>
+
+                <div class="stat-icon">
+                    📦
+                </div>
+
+            </div>
+
+            <div class="stat-number"
+                 id="totalProducts">
+
+                0
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <span class="stat-label">
+                    Available Products
+                </span>
+
+                <div class="stat-icon">
+                    ✓
+                </div>
+
+            </div>
+
+            <div class="stat-number"
+                 id="availableProducts">
+
+                0
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <span class="stat-label">
+                    Catalog Views
+                </span>
+
+                <div class="stat-icon">
+                    👁
+                </div>
+
+            </div>
+
+            <div class="stat-number">
+
+                0
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <span class="stat-label">
+                    Catalog Status
+                </span>
+
+                <div class="stat-icon">
+                    🚀
+                </div>
+
+            </div>
+
+            <div class="stat-number"
+                 id="dashboardStatus">
+
+                Draft
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- DASHBOARD GRID -->
+
+    <div class="dashboard-grid">
+
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <h3>
+                    Catalog Progress
+                </h3>
+
+            </div>
+
+
+            <div id="progressContent">
+
+                Complete your business profile and add products to publish your catalog.
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <h3>
+                    Quick Actions
+                </h3>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+
+                <button class="quick-action"
+                        onclick="showPageByName('business')">
+
+                    <div class="quick-icon">
+                        🏪
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Business Profile
+                        </strong>
+
+                        <span>
+                            Edit your information
+                        </span>
+
+                    </div>
+
+                </button>
+
+
+                <button class="quick-action"
+                        onclick="showPageByName('products')">
+
+                    <div class="quick-icon">
+                        📦
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Add Products
+                        </strong>
+
+                        <span>
+                            Build your catalog
+                        </span>
+
+                    </div>
+
+                </button>
+
+
+                <button class="quick-action"
+                        onclick="showPageByName('catalog')">
+
+                    <div class="quick-icon">
+                        🚀
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Publish Catalog
+                        </strong>
+
+                        <span>
+                            Share your business
+                        </span>
+
+                    </div>
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     BUSINESS PROFILE
+===================================================== -->
+
+<section class="page"
+         id="businessPage">
+
+
+    <div class="welcome">
+
+        <div>
+
+            <h1>
+                Business Profile
+            </h1>
+
+            <p>
+                Customize the information customers will see.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="card form-card">
+
+
+        <div class="form-grid">
+
+
+            <div class="form-group full">
+
+                <label>
+                    Business Logo
+                </label>
+
+
+                <div class="upload-area"
+                     onclick="document.getElementById('businessLogoInput').click()">
+
+                    <div class="upload-icon">
+                        🖼
+                    </div>
+
+                    <strong>
+                        Upload your business logo
+                    </strong>
+
+                    <span>
+                        PNG, JPG or WEBP
+                    </span>
+
+                </div>
+
+
+                <input type="file"
+                       id="businessLogoInput"
+                       accept="image/*"
+                       hidden
+                       onchange="previewBusinessLogo(event)">
+
+
+                <div class="image-preview"
+                     id="businessLogoPreview">
+
+                    <img id="businessLogoImage">
+
+                </div>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Business Name *
+                </label>
+
+                <input type="text"
+                       id="businessName"
+                       placeholder="Your business name">
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Business Category *
+                </label>
+
+                <select id="businessCategory">
+
+                    <option value="">
+                        Select Category
+                    </option>
+
+                    <option>
+                        Restaurant & Food
+                    </option>
+
+                    <option>
+                        Clothing & Fashion
+                    </option>
+
+                    <option>
+                        Beauty & Salon
+                    </option>
+
+                    <option>
+                        Electronics
+                    </option>
+
+                    <option>
+                        Gifts & Handmade
+                    </option>
+
+                    <option>
+                        Grocery
+                    </option>
+
+                    <option>
+                        Home & Living
+                    </option>
+
+                    <option>
+                        Services
+                    </option>
+
+                    <option>
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <div class="form-group full">
+
+                <label>
+                    Business Description
+                </label>
+
+                <textarea id="businessDescription"
+                          placeholder="Tell customers about your business..."></textarea>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    WhatsApp Number *
+                </label>
+
+                <input type="tel"
+                       id="businessWhatsapp"
+                       placeholder="+94 77 123 4567">
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Phone Number
+                </label>
+
+                <input type="tel"
+                       id="businessPhone"
+                       placeholder="+94">
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    City / Area
+                </label>
+
+                <input type="text"
+                       id="businessCity"
+                       placeholder="Colombo">
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Country
+                </label>
+
+                <input type="text"
+                       id="businessCountry"
+                       value="Sri Lanka">
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Facebook
+                </label>
+
+                <input type="text"
+                       id="businessFacebook"
+                       placeholder="Facebook page link">
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Instagram
+                </label>
+
+                <input type="text"
+                       id="businessInstagram"
+                       placeholder="@yourbusiness">
+
+            </div>
+
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <button class="btn btn-teal"
+                    onclick="saveBusinessProfile()">
+
+                Save Business Profile
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     PRODUCTS
+===================================================== -->
+
+<section class="page"
+         id="productsPage">
+
+
+    <div class="products-header">
+
+        <div>
+
+            <h1>
+                My Products
+            </h1>
+
+            <p style="color:var(--muted); font-size:13px; margin-top:7px;">
+
+                Add and manage products in your catalog.
+
+            </p>
+
+        </div>
+
+
+        <button class="btn btn-teal"
+                onclick="openProductModal()">
+
+            + Add New Product
+
+        </button>
+
+    </div>
+
+
+    <div class="products-grid"
+         id="productsGrid">
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     PUBLISH CATALOG
+===================================================== -->
+
+<section class="page"
+         id="catalogPage">
+
+
+    <div class="welcome">
+
+        <div>
+
+            <h1>
+                Publish Your Catalog
+            </h1>
+
+            <p>
+                Make your products available to customers.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="catalog-status">
+
+
+        <!-- PUBLISH -->
+
+        <div class="publish-card">
+
+            <div class="publish-icon">
+                🚀
+            </div>
+
+
+            <h2 id="publishTitle">
+                Your catalog is not published
+            </h2>
+
+
+            <p id="publishDescription">
+
+                Complete your business profile and add products before sharing your catalog with customers.
+
+            </p>
+
+
+            <button class="btn btn-teal"
+                    id="publishButton"
+                    onclick="togglePublish()">
+
+                Publish My Catalog
+
+            </button>
+
+        </div>
+
+
+
+        <!-- LINK -->
+
+        <div class="publish-card">
+
+            <div class="publish-icon">
+                🔗
+            </div>
+
+
+            <h2>
+                Your Catalog Link
+            </h2>
+
+
+            <p>
+                Share this link on Facebook, WhatsApp, TikTok and anywhere customers can discover your business.
+            </p>
+
+
+            <div class="catalog-link-box">
+
+                <strong style="font-size:12px;">
+                    Public Catalog
+                </strong>
+
+
+                <div class="catalog-link">
+
+                    <input type="text"
+                           id="catalogLink"
+                           readonly>
+
+                    <button class="copy-btn"
+                            onclick="copyCatalogLink()">
+
+                        📋
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- CATALOG PREVIEW -->
+
+    <div class="card"
+         style="margin-top:20px;">
+
+        <div class="card-header">
+
+            <h3>
+                Before Publishing Checklist
+            </h3>
+
+        </div>
+
+
+        <div id="checklist">
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+</div>
+
+</main>
+
+</div>
+
+
+
+<!-- =====================================================
+     PRODUCT MODAL
+===================================================== -->
+
+<div class="modal"
+     id="productModal">
+
+
+    <div class="modal-content">
+
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                Add New Product
+            </h2>
+
+
+            <button class="close-modal"
+                    onclick="closeProductModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+
+        <input type="hidden"
+               id="editingProductId">
+
+
+
+        <div class="form-grid">
+
+
+            <div class="form-group full">
+
+                <label>
+                    Product Image
+                </label>
+
+
+                <div class="upload-area"
+                     onclick="document.getElementById('productImageInput').click()">
+
+                    <div class="upload-icon">
+                        📷
+                    </div>
+
+                    <strong>
+                        Upload Product Image
+                    </strong>
+
+                    <span>
+                        A good product photo helps increase sales
+                    </span>
+
+                </div>
+
+
+                <input type="file"
+                       id="productImageInput"
+                       hidden
+                       accept="image/*"
+                       onchange="previewProductImage(event)">
+
+
+                <div class="image-preview"
+                     id="productImagePreview">
+
+                    <img id="productImage">
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Product Name *
+                </label>
+
+                <input type="text"
+                       id="productName"
+                       placeholder="Example: Handmade Gift Box">
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Category
+                </label>
+
+                <input type="text"
+                       id="productCategory"
+                       placeholder="Example: Gifts">
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Price (LKR) *
+                </label>
+
+                <input type="number"
+                       id="productPrice"
+                       placeholder="2500">
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Availability
+                </label>
+
+                <select id="productAvailability">
+
+                    <option value="available">
+                        Available
+                    </option>
+
+                    <option value="unavailable">
+                        Unavailable
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <div class="form-group full">
+
+                <label>
+                    Product Description
+                </label>
+
+                <textarea id="productDescription"
+                          placeholder="Describe your product..."></textarea>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="form-actions">
+
+            <button class="btn btn-light"
+                    onclick="closeProductModal()">
+
+                Cancel
+
+            </button>
+
+
+            <button class="btn btn-teal"
+                    onclick="saveProduct()">
+
+                Save Product
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div class="toast"
+     id="toast">
+
+    Saved Successfully!
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   DATA
+===================================================== */
+
+let products =
+    JSON.parse(
+        localStorage.getItem("bizicatProducts")
+    ) || [];
+
+
+let business =
+    JSON.parse(
+        localStorage.getItem("bizicatBusiness")
+    ) || {
+
+        name: "",
+        category: "",
+        description: "",
+        whatsapp: "",
+        phone: "",
+        city: "",
+        country: "Sri Lanka",
+        facebook: "",
+        instagram: "",
+        logo: ""
+
+    };
+
+
+let catalogPublished =
+    JSON.parse(
+        localStorage.getItem("bizicatPublished")
+    ) || false;
+
+
+let currentProductImage = "";
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        loadBusinessProfile();
+
+        renderProducts();
+
+        updateDashboard();
+
+        updateCatalogPage();
+
+    }
+);
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+function toggleSidebar() {
+
+    document
+        .getElementById("sidebar")
+        .classList
+        .toggle("open");
+
+}
+
+
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
+
+function showPage(pageName, button) {
+
+    document
+        .querySelectorAll(".page")
+        .forEach(page => {
+
+            page.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById(pageName + "Page")
+        .classList
+        .add("active");
+
+
+    document
+        .querySelectorAll(".nav button")
+        .forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+
+    if (button) {
+
+        button.classList.add("active");
+
+    }
+
+
+    const titles = {
+
+        dashboard: "Dashboard",
+
+        business: "Business Profile",
+
+        products: "My Products",
+
+        catalog: "Publish Catalog"
+
+    };
+
+
+    document
+        .getElementById("pageTitle")
+        .innerText =
+        titles[pageName];
+
+
+    document
+        .getElementById("sidebar")
+        .classList
+        .remove("open");
+
+
+    if (pageName === "catalog") {
+
+        updateCatalogPage();
+
+    }
+
+}
+
+
+function showPageByName(name) {
+
+    const buttons =
+        document.querySelectorAll(".nav button");
+
+
+    const index = {
+
+        dashboard: 0,
+
+        business: 1,
+
+        products: 2,
+
+        catalog: 3
+
+    };
+
+
+    showPage(
+        name,
+        buttons[index[name]]
+    );
+
+}
+
+
+/* =====================================================
+   BUSINESS PROFILE
+===================================================== */
+
+function loadBusinessProfile() {
+
+    document
+        .getElementById("businessName")
+        .value =
+        business.name || "";
+
+
+    document
+        .getElementById("businessCategory")
+        .value =
+        business.category || "";
+
+
+    document
+        .getElementById("businessDescription")
+        .value =
+        business.description || "";
+
+
+    document
+        .getElementById("businessWhatsapp")
+        .value =
+        business.whatsapp || "";
+
+
+    document
+        .getElementById("businessPhone")
+        .value =
+        business.phone || "";
+
+
+    document
+        .getElementById("businessCity")
+        .value =
+        business.city || "";
+
+
+    document
+        .getElementById("businessCountry")
+        .value =
+        business.country || "Sri Lanka";
+
+
+    document
+        .getElementById("businessFacebook")
+        .value =
+        business.facebook || "";
+
+
+    document
+        .getElementById("businessInstagram")
+        .value =
+        business.instagram || "";
+
+
+    if (business.logo) {
+
+        document
+            .getElementById("businessLogoPreview")
+            .style.display = "block";
+
+
+        document
+            .getElementById("businessLogoImage")
+            .src = business.logo;
+
+    }
+
+}
+
+
+function previewBusinessLogo(event) {
+
+    const file =
+        event.target.files[0];
+
+
+    if (!file) return;
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload = function(e) {
+
+        business.logo =
+            e.target.result;
+
+
+        document
+            .getElementById("businessLogoPreview")
+            .style.display =
+            "block";
+
+
+        document
+            .getElementById("businessLogoImage")
+            .src =
+            business.logo;
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+function saveBusinessProfile() {
+
+    const name =
+        document
+            .getElementById("businessName")
+            .value
+            .trim();
+
+
+    const whatsapp =
+        document
+            .getElementById("businessWhatsapp")
+            .value
+            .trim();
+
+
+    if (!name) {
+
+        showToast(
+            "Please enter your business name."
+        );
+
+        return;
+
+    }
+
+
+    business.name =
+        name;
+
+
+    business.category =
+        document
+            .getElementById("businessCategory")
+            .value;
+
+
+    business.description =
+        document
+            .getElementById("businessDescription")
+            .value;
+
+
+    business.whatsapp =
+        whatsapp;
+
+
+    business.phone =
+        document
+            .getElementById("businessPhone")
+            .value;
+
+
+    business.city =
+        document
+            .getElementById("businessCity")
+            .value;
+
+
+    business.country =
+        document
+            .getElementById("businessCountry")
+            .value;
+
+
+    business.facebook =
+        document
+            .getElementById("businessFacebook")
+            .value;
+
+
+    business.instagram =
+        document
+            .getElementById("businessInstagram")
+            .value;
+
+
+    localStorage.setItem(
+        "bizicatBusiness",
+        JSON.stringify(business)
+    );
+
+
+    updateDashboard();
+
+    updateCatalogPage();
+
+    showToast(
+        "Business profile saved successfully!"
+    );
+
+}
+
+
+/* =====================================================
+   PRODUCTS
+===================================================== */
+
+function openProductModal() {
+
+    document
+        .getElementById("productModal")
+        .classList
+        .add("active");
+
+
+    document
+        .getElementById("modalTitle")
+        .innerText =
+        "Add New Product";
+
+
+    document
+        .getElementById("editingProductId")
+        .value =
+        "";
+
+
+    clearProductForm();
+
+}
+
+
+function closeProductModal() {
+
+    document
+        .getElementById("productModal")
+        .classList
+        .remove("active");
+
+}
+
+
+function clearProductForm() {
+
+    document
+        .getElementById("productName")
+        .value = "";
+
+
+    document
+        .getElementById("productCategory")
+        .value = "";
+
+
+    document
+        .getElementById("productPrice")
+        .value = "";
+
+
+    document
+        .getElementById("productDescription")
+        .value = "";
+
+
+    document
+        .getElementById("productAvailability")
+        .value = "available";
+
+
+    document
+        .getElementById("productImagePreview")
+        .style.display =
+        "none";
+
+
+    currentProductImage = "";
+
+}
+
+
+function previewProductImage(event) {
+
+    const file =
+        event.target.files[0];
+
+
+    if (!file) return;
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload = function(e) {
+
+        currentProductImage =
+            e.target.result;
+
+
+        document
+            .getElementById("productImagePreview")
+            .style.display =
+            "block";
+
+
+        document
+            .getElementById("productImage")
+            .src =
+            currentProductImage;
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+function saveProduct() {
+
+    const name =
+        document
+            .getElementById("productName")
+            .value
+            .trim();
+
+
+    const price =
+        document
+            .getElementById("productPrice")
+            .value;
+
+
+    if (!name || !price) {
+
+        showToast(
+            "Product name and price are required."
+        );
+
+        return;
+
+    }
+
+
+    const editingId =
+        document
+            .getElementById("editingProductId")
+            .value;
+
+
+    const product = {
+
+        id:
+            editingId ||
+            Date.now().toString(),
+
+        name,
+
+        category:
+            document
+                .getElementById("productCategory")
+                .value,
+
+        price,
+
+        description:
+            document
+                .getElementById("productDescription")
+                .value,
+
+        availability:
+            document
+                .getElementById("productAvailability")
+                .value,
+
+        image:
+            currentProductImage
+
+    };
+
+
+    if (editingId) {
+
+        const index =
+            products.findIndex(
+                item =>
+                    item.id === editingId
+            );
+
+
+        products[index] =
+            product;
+
+    }
+
+    else {
+
+        products.push(product);
+
+    }
+
+
+    localStorage.setItem(
+        "bizicatProducts",
+        JSON.stringify(products)
+    );
+
+
+    renderProducts();
+
+    updateDashboard();
+
+    updateCatalogPage();
+
+    closeProductModal();
+
+    showToast(
+        "Product saved successfully!"
+    );
+
+}
+
+
+function renderProducts() {
+
+    const grid =
+        document
+            .getElementById("productsGrid");
+
+
+    if (products.length === 0) {
+
+        grid.innerHTML = `
+
+            <div class="empty-state">
+
+                <div>📦</div>
+
+                <h3>
+                    Your catalog is empty
+                </h3>
+
+                <p>
+                    Start adding products to build your BIZICAT catalog.
+                </p>
+
+                <br>
+
+                <button
+                    class="btn btn-teal"
+                    onclick="openProductModal()">
+
+                    + Add Your First Product
+
+                </button>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    grid.innerHTML =
+        products.map(product => `
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    ${
+                        product.image
+                        ?
+
+                        `<img src="${product.image}">`
+
+                        :
+
+                        `<div class="no-image">📦</div>`
+                    }
+
+                </div>
+
+
+                <div class="product-content">
+
+                    <div class="product-name">
+                        ${escapeHTML(product.name)}
+                    </div>
+
+
+                    <div class="product-price">
+
+                        LKR
+                        ${Number(product.price).toLocaleString()}
+
+                    </div>
+
+
+                    <div class="product-category">
+
+                        ${escapeHTML(
+                            product.category || "General"
+                        )}
+
+                        •
+
+                        ${product.availability}
+
+                    </div>
+
+
+                    <div class="product-actions">
+
+                        <button
+                            class="small-btn edit-btn"
+                            onclick="editProduct('${product.id}')">
+
+                            Edit
+
+                        </button>
+
+
+                        <button
+                            class="small-btn delete-btn"
+                            onclick="deleteProduct('${product.id}')">
+
+                            Delete
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `).join("");
+
+}
+
+
+function editProduct(id) {
+
+    const product =
+        products.find(
+            item => item.id === id
+        );
+
+
+    if (!product) return;
+
+
+    document
+        .getElementById("productModal")
+        .classList
+        .add("active");
+
+
+    document
+        .getElementById("modalTitle")
+        .innerText =
+        "Edit Product";
+
+
+    document
+        .getElementById("editingProductId")
+        .value =
+        product.id;
+
+
+    document
+        .getElementById("productName")
+        .value =
+        product.name;
+
+
+    document
+        .getElementById("productCategory")
+        .value =
+        product.category;
+
+
+    document
+        .getElementById("productPrice")
+        .value =
+        product.price;
+
+
+    document
+        .getElementById("productDescription")
+        .value =
+        product.description;
+
+
+    document
+        .getElementById("productAvailability")
+        .value =
+        product.availability;
+
+
+    currentProductImage =
+        product.image;
+
+
+    if (product.image) {
+
+        document
+            .getElementById("productImagePreview")
+            .style.display =
+            "block";
+
+
+        document
+            .getElementById("productImage")
+            .src =
+            product.image;
+
+    }
+
+}
+
+
+function deleteProduct(id) {
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to delete this product?"
+        );
+
+
+    if (!confirmed) return;
+
+
+    products =
+        products.filter(
+            product =>
+                product.id !== id
+        );
+
+
+    localStorage.setItem(
+        "bizicatProducts",
+        JSON.stringify(products)
+    );
+
+
+    renderProducts();
+
+    updateDashboard();
+
+    updateCatalogPage();
+
+    showToast(
+        "Product deleted."
+    );
+
+}
+
+
+/* =====================================================
+   DASHBOARD UPDATE
+===================================================== */
+
+function updateDashboard() {
+
+    const available =
+        products.filter(
+            product =>
+                product.availability === "available"
+        ).length;
+
+
+    document
+        .getElementById("totalProducts")
+        .innerText =
+        products.length;
+
+
+    document
+        .getElementById("availableProducts")
+        .innerText =
+        available;
+
+
+    document
+        .getElementById("dashboardStatus")
+        .innerText =
+        catalogPublished
+            ? "Live"
+            : "Draft";
+
+
+    document
+        .getElementById("sidebarBusinessName")
+        .innerText =
+        business.name ||
+        "My Business";
+
+
+    document
+        .getElementById("merchantAvatar")
+        .innerText =
+        business.name
+            ?
+            business.name.charAt(0).toUpperCase()
+            :
+            "B";
+
+
+    let progress = [];
+
+
+    progress.push(
+        business.name
+            ? "✓ Business profile created"
+            : "○ Complete your business profile"
+    );
+
+
+    progress.push(
+        products.length > 0
+            ? `✓ ${products.length} products added`
+            : "○ Add your first product"
+    );
+
+
+    progress.push(
+        catalogPublished
+            ? "✓ Catalog is published"
+            : "○ Publish your catalog"
+    );
+
+
+    document
+        .getElementById("progressContent")
+        .innerHTML =
+        progress.map(item => `
+
+            <div style="
+                padding:12px 0;
+                border-bottom:1px solid #eef1f3;
+                font-size:13px;
+            ">
+
+                ${item}
+
+            </div>
+
+        `).join("");
+
+}
+
+
+/* =====================================================
+   CATALOG
+===================================================== */
+
+function getCatalogSlug() {
+
+    if (!business.name) {
+
+        return "your-business";
+
+    }
+
+
+    return business.name
+
+        .toLowerCase()
+
+        .trim()
+
+        .replace(/[^a-z0-9]+/g, "-")
+
+        .replace(/^-|-$/g, "");
+
+}
+
+
+function getCatalogURL() {
+
+    /*
+       Change this when you have your real domain.
+
+       Example:
+       https://bizicat.com/catalog/
+    */
+
+    return (
+        window.location.origin +
+        "/catalog.html?store=" +
+        getCatalogSlug()
+    );
+
+}
+
+
+function updateCatalogPage() {
+
+    const link =
+        getCatalogURL();
+
+
+    document
+        .getElementById("catalogLink")
+        .value =
+        link;
+
+
+    const checklist = [
+
+        {
+            text: "Business profile completed",
+            done: !!business.name
+        },
+
+        {
+            text: "WhatsApp number added",
+            done: !!business.whatsapp
+        },
+
+        {
+            text: "At least one product added",
+            done: products.length > 0
+        }
+
+    ];
+
+
+    document
+        .getElementById("checklist")
+        .innerHTML =
+        checklist.map(item => `
+
+            <div style="
+                display:flex;
+                align-items:center;
+                gap:12px;
+                padding:13px 0;
+                border-bottom:1px solid #eef1f3;
+                font-size:13px;
+            ">
+
+                <span style="
+                    font-size:18px;
+                    color:${item.done ? '#1da866' : '#f0a52b'};
+                ">
+
+                    ${item.done ? "✓" : "○"}
+
+                </span>
+
+                ${item.text}
+
+            </div>
+
+        `).join("");
+
+
+    const status =
+        document
+            .getElementById("catalogStatus");
+
+
+    const publishTitle =
+        document
+            .getElementById("publishTitle");
+
+
+    const publishDescription =
+        document
+            .getElementById("publishDescription");
+
+
+    const publishButton =
+        document
+            .getElementById("publishButton");
+
+
+    if (catalogPublished) {
+
+        status.className =
+            "status published";
+
+
+        status.innerText =
+            "● Published";
+
+
+        publishTitle.innerText =
+            "Your catalog is live! 🎉";
+
+
+        publishDescription.innerText =
+            "Customers can now visit your catalog and order products directly through WhatsApp.";
+
+
+        publishButton.innerText =
+            "Unpublish Catalog";
+
+
+        publishButton.className =
+            "btn btn-light";
+
+    }
+
+    else {
+
+        status.className =
+            "status draft";
+
+
+        status.innerText =
+            "● Draft";
+
+
+        publishTitle.innerText =
+            "Your catalog is not published";
+
+
+        publishDescription.innerText =
+            "Complete your profile and add products before publishing your catalog.";
+
+
+        publishButton.innerText =
+            "Publish My Catalog";
+
+
+        publishButton.className =
+            "btn btn-teal";
+
+    }
+
+}
+
+
+function togglePublish() {
+
+    if (!catalogPublished) {
+
+        if (!business.name) {
+
+            showToast(
+                "Please complete your business profile first."
+            );
+
+            return;
+
+        }
+
+
+        if (!business.whatsapp) {
+
+            showToast(
+                "Please add your WhatsApp number first."
+            );
+
+            return;
+
+        }
+
+
+        if (products.length === 0) {
+
+            showToast(
+                "Please add at least one product."
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    catalogPublished =
+        !catalogPublished;
+
+
+    localStorage.setItem(
+        "bizicatPublished",
+        JSON.stringify(catalogPublished)
+    );
+
+
+    updateDashboard();
+
+    updateCatalogPage();
+
+
+    showToast(
+
+        catalogPublished
+
+            ?
+
+            "🎉 Your catalog is now published!"
+
+            :
+
+            "Your catalog has been unpublished."
+
+    );
+
+}
+
+
+/* =====================================================
+   COPY LINK
+===================================================== */
+
+function copyCatalogLink() {
+
+    const link =
+        document
+            .getElementById("catalogLink");
+
+
+    navigator.clipboard
+        .writeText(link.value)
+        .then(() => {
+
+            showToast(
+                "Catalog link copied!"
+            );
+
+        });
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(message) {
+
+    const toast =
+        document
+            .getElementById("toast");
+
+
+    toast.innerText =
+        message;
+
+
+    toast.classList.add("show");
+
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 3000);
+
+}
+
+
+/* =====================================================
+   SECURITY HELPER
+===================================================== */
+
+function escapeHTML(text) {
+
+    if (!text) return "";
+
+
+    const div =
+        document.createElement("div");
+
+
+    div.textContent =
+        text;
+
+
+    return div.innerHTML;
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout() {
+
+    const confirmLogout =
+        confirm(
+            "Do you want to log out?"
+        );
+
+
+    if (!confirmLogout) return;
+
+
+    /*
+       Connect this to your real login page
+    */
+
+    window.location.href =
+        "login.html";
+
+}
+
+</script>
+
+</body>
+</html>
