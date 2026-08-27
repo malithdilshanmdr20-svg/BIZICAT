@@ -1,0 +1,2318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Your BIZICAT Account | Start Your Digital Catalog</title>
+
+    <meta name="description"
+        content="Create your BIZICAT merchant account and build your digital product catalog. Receive customer orders directly through WhatsApp.">
+
+    <meta name="theme-color" content="#101c2c">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        /* =========================================
+           BIZICAT REGISTRATION PAGE
+        ========================================= */
+
+        :root {
+            --navy: #101c2c;
+            --navy-light: #1b2b40;
+            --navy-dark: #09121d;
+
+            --teal: #08a6b5;
+            --teal-dark: #078c99;
+            --teal-light: #e6f9fb;
+
+            --white: #ffffff;
+            --background: #f5f8fa;
+
+            --text: #142033;
+            --muted: #6f7c8c;
+
+            --border: #e2e9ee;
+            --danger: #e5484d;
+            --success: #19a463;
+
+            --shadow: 0 25px 70px rgba(16, 28, 44, 0.10);
+            --radius: 24px;
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+
+        button {
+            cursor: pointer;
+        }
+
+
+        /* =========================================
+           MAIN LAYOUT
+        ========================================= */
+
+        .page {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+
+        /* =========================================
+           LEFT BRAND SECTION
+        ========================================= */
+
+        .brand-panel {
+            display: none;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 85% 15%,
+                    rgba(8, 166, 181, 0.25),
+                    transparent 28%
+                ),
+
+                radial-gradient(
+                    circle at 10% 90%,
+                    rgba(8, 166, 181, 0.12),
+                    transparent 30%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #0c1725,
+                    #13263a
+                );
+
+            color: white;
+            padding: 60px;
+        }
+
+
+        .brand-panel::before {
+            content: "";
+
+            position: absolute;
+
+            width: 450px;
+            height: 450px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,0.07);
+
+            right: -180px;
+            top: -100px;
+        }
+
+
+        .brand-panel::after {
+            content: "";
+
+            position: absolute;
+
+            width: 320px;
+            height: 320px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(8,166,181,0.25);
+
+            left: -180px;
+            bottom: -100px;
+        }
+
+
+        .brand-content {
+            position: relative;
+            z-index: 2;
+
+            max-width: 500px;
+            margin: auto;
+
+            height: 100%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin-bottom: 70px;
+        }
+
+
+        .brand-logo img {
+            width: 58px;
+            height: 58px;
+            object-fit: contain;
+
+            background: white;
+            border-radius: 14px;
+            padding: 4px;
+        }
+
+
+        .brand-logo span {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+
+        .brand-content h1 {
+            font-size: clamp(42px, 4vw, 65px);
+            line-height: 1.02;
+
+            letter-spacing: -3px;
+
+            font-weight: 900;
+
+            margin-bottom: 25px;
+        }
+
+
+        .brand-content h1 span {
+            color: var(--teal);
+        }
+
+
+        .brand-content > p {
+            color: #aebdca;
+
+            font-size: 16px;
+            line-height: 1.7;
+
+            max-width: 440px;
+        }
+
+
+        /* BENEFITS */
+
+        .benefits {
+            margin-top: 55px;
+
+            display: grid;
+            gap: 18px;
+        }
+
+
+        .benefit {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+
+        .benefit-icon {
+            width: 44px;
+            height: 44px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 13px;
+
+            background: rgba(8,166,181,0.13);
+
+            color: var(--teal);
+
+            font-size: 19px;
+        }
+
+
+        .benefit strong {
+            display: block;
+
+            font-size: 14px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .benefit small {
+            color: #93a2b1;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================================
+           REGISTRATION PANEL
+        ========================================= */
+
+        .registration-panel {
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 28px 18px;
+
+            min-height: 100vh;
+        }
+
+
+        .registration-container {
+            width: 100%;
+            max-width: 620px;
+        }
+
+
+        /* MOBILE LOGO */
+
+        .mobile-brand {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 10px;
+
+            margin-bottom: 28px;
+        }
+
+
+        .mobile-brand img {
+            width: 48px;
+            height: 48px;
+
+            object-fit: contain;
+        }
+
+
+        .mobile-brand span {
+            font-weight: 900;
+
+            font-size: 22px;
+
+            letter-spacing: -.8px;
+
+            color: var(--navy);
+        }
+
+
+        /* REGISTRATION CARD */
+
+        .registration-card {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            padding: 28px 20px;
+
+            box-shadow: var(--shadow);
+        }
+
+
+        /* HEADER */
+
+        .form-header {
+            text-align: center;
+
+            margin-bottom: 28px;
+        }
+
+
+        .form-header h2 {
+            color: var(--navy);
+
+            font-size: 28px;
+
+            letter-spacing: -1.2px;
+        }
+
+
+        .form-header p {
+            color: var(--muted);
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            margin-top: 9px;
+        }
+
+
+        /* =========================================
+           PROGRESS BAR
+        ========================================= */
+
+        .progress-container {
+            margin-bottom: 30px;
+        }
+
+
+        .steps-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            color: var(--muted);
+
+            margin-bottom: 10px;
+        }
+
+
+        .progress-bar {
+            height: 7px;
+
+            background: #edf1f4;
+
+            border-radius: 50px;
+
+            overflow: hidden;
+        }
+
+
+        .progress-fill {
+            width: 33.33%;
+            height: 100%;
+
+            border-radius: 50px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--teal),
+                    #42c6d2
+                );
+
+            transition: width .4s ease;
+        }
+
+
+        /* =========================================
+           STEPS
+        ========================================= */
+
+        .form-step {
+            display: none;
+
+            animation: fadeIn .35s ease;
+        }
+
+
+        .form-step.active {
+            display: block;
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+                opacity: 0;
+                transform: translateX(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+        }
+
+
+        .step-title {
+            margin-bottom: 22px;
+        }
+
+
+        .step-title h3 {
+            font-size: 20px;
+
+            color: var(--navy);
+        }
+
+
+        .step-title p {
+            color: var(--muted);
+
+            font-size: 12px;
+
+            margin-top: 7px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================
+           FORM
+        ========================================= */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            gap: 16px;
+        }
+
+
+        .form-group {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+
+        label {
+            font-size: 12px;
+
+            font-weight: 700;
+
+            color: #394657;
+        }
+
+
+        label span {
+            color: var(--teal);
+        }
+
+
+        input,
+        select {
+            width: 100%;
+
+            height: 52px;
+
+            padding: 0 15px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 13px;
+
+            outline: none;
+
+            background: white;
+
+            color: var(--text);
+
+            font-size: 13px;
+
+            transition: .25s;
+        }
+
+
+        input:focus,
+        select:focus {
+            border-color: var(--teal);
+
+            box-shadow:
+                0 0 0 4px
+                rgba(8,166,181,.10);
+        }
+
+
+        input::placeholder {
+            color: #a5afba;
+        }
+
+
+        .input-wrapper {
+            position: relative;
+        }
+
+
+        .input-wrapper input {
+            padding-right: 50px;
+        }
+
+
+        .toggle-password {
+            position: absolute;
+
+            right: 8px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: 0;
+
+            background: transparent;
+
+            color: var(--muted);
+
+            padding: 8px;
+
+            font-size: 16px;
+        }
+
+
+        /* =========================================
+           PASSWORD STRENGTH
+        ========================================= */
+
+        .password-strength {
+            margin-top: -2px;
+        }
+
+
+        .strength-bars {
+            display: flex;
+
+            gap: 5px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .strength-bar {
+            height: 4px;
+
+            flex: 1;
+
+            background: #e8edf0;
+
+            border-radius: 10px;
+
+            transition: .3s;
+        }
+
+
+        .strength-text {
+            font-size: 10px;
+
+            color: var(--muted);
+        }
+
+
+        /* =========================================
+           INFO BOX
+        ========================================= */
+
+        .info-box {
+            background: var(--teal-light);
+
+            border: 1px solid #cceff2;
+
+            padding: 15px;
+
+            border-radius: 14px;
+
+            display: flex;
+
+            gap: 12px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .info-box-icon {
+            font-size: 19px;
+        }
+
+
+        .info-box strong {
+            display: block;
+
+            font-size: 12px;
+
+            color: var(--navy);
+
+            margin-bottom: 4px;
+        }
+
+
+        .info-box p {
+            color: #55717a;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================
+           WHATSAPP BOX
+        ========================================= */
+
+        .whatsapp-preview {
+            background: #effbf4;
+
+            border: 1px solid #d4f3e1;
+
+            border-radius: 15px;
+
+            padding: 16px;
+
+            margin-top: 18px;
+        }
+
+
+        .whatsapp-preview-header {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .whatsapp-icon {
+            width: 35px;
+            height: 35px;
+
+            border-radius: 10px;
+
+            background: #25D366;
+
+            display: grid;
+            place-items: center;
+
+            color: white;
+
+            font-size: 16px;
+        }
+
+
+        .whatsapp-preview strong {
+            font-size: 12px;
+        }
+
+
+        .whatsapp-preview p {
+            font-size: 10px;
+
+            color: #557064;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================
+           TERMS
+        ========================================= */
+
+        .checkbox-group {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 10px;
+
+            margin-top: 20px;
+        }
+
+
+        .checkbox-group input {
+            width: 17px;
+            height: 17px;
+
+            margin-top: 1px;
+
+            accent-color: var(--teal);
+        }
+
+
+        .checkbox-group label {
+            font-size: 11px;
+
+            font-weight: 500;
+
+            color: var(--muted);
+
+            line-height: 1.5;
+        }
+
+
+        .checkbox-group a {
+            color: var(--teal);
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================
+           BUTTONS
+        ========================================= */
+
+        .form-actions {
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 26px;
+        }
+
+
+        .btn {
+            border: none;
+
+            height: 52px;
+
+            border-radius: 13px;
+
+            padding: 0 20px;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            transition: .25s;
+        }
+
+
+        .btn-primary {
+            background: var(--navy);
+
+            color: white;
+
+            flex: 1;
+
+            box-shadow:
+                0 10px 25px
+                rgba(16,28,44,.16);
+        }
+
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+
+            background: var(--navy-light);
+        }
+
+
+        .btn-teal {
+            background: var(--teal);
+
+            color: white;
+
+            flex: 1;
+
+            box-shadow:
+                0 10px 25px
+                rgba(8,166,181,.20);
+        }
+
+
+        .btn-teal:hover {
+            transform: translateY(-2px);
+
+            background: var(--teal-dark);
+        }
+
+
+        .btn-back {
+            background: #f1f4f6;
+
+            color: var(--navy);
+
+            min-width: 110px;
+        }
+
+
+        .btn-back:hover {
+            background: #e6ebee;
+        }
+
+
+        /* LOGIN */
+
+        .login-link {
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+
+        .login-link a {
+            color: var(--teal);
+
+            font-weight: 800;
+        }
+
+
+        /* =========================================
+           SUCCESS SCREEN
+        ========================================= */
+
+        .success-screen {
+            display: none;
+
+            text-align: center;
+
+            padding: 20px 0;
+
+            animation: fadeIn .5s ease;
+        }
+
+
+        .success-icon {
+            width: 85px;
+            height: 85px;
+
+            margin: 0 auto 22px;
+
+            border-radius: 50%;
+
+            display: grid;
+            place-items: center;
+
+            background: #e8f9ef;
+
+            color: var(--success);
+
+            font-size: 40px;
+        }
+
+
+        .success-screen h2 {
+            color: var(--navy);
+
+            font-size: 29px;
+
+            letter-spacing: -1px;
+        }
+
+
+        .success-screen p {
+            color: var(--muted);
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+            margin: 14px auto 25px;
+
+            max-width: 400px;
+        }
+
+
+        .success-summary {
+            text-align: left;
+
+            background: var(--background);
+
+            border-radius: 16px;
+
+            padding: 18px;
+
+            margin-bottom: 24px;
+        }
+
+
+        .summary-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 10px 0;
+
+            border-bottom: 1px solid var(--border);
+
+            font-size: 12px;
+        }
+
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+
+        .summary-row span {
+            color: var(--muted);
+        }
+
+
+        .summary-row strong {
+            color: var(--navy);
+
+            text-align: right;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (min-width: 650px) {
+
+            .registration-card {
+                padding: 38px;
+            }
+
+            .form-grid.two {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+
+        @media (min-width: 1000px) {
+
+            .page {
+                grid-template-columns: 45% 55%;
+            }
+
+            .brand-panel {
+                display: block;
+            }
+
+            .mobile-brand {
+                display: none;
+            }
+
+            .registration-panel {
+                padding: 50px;
+            }
+
+        }
+
+
+        @media (max-width: 430px) {
+
+            .registration-card {
+                padding: 24px 16px;
+            }
+
+            .form-header h2 {
+                font-size: 25px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn-back {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =====================================
+         LEFT BRAND SECTION
+    ====================================== -->
+
+    <aside class="brand-panel">
+
+        <div class="brand-content">
+
+            <div class="brand-logo">
+
+                <img
+                    src="bizicat-logo.png"
+                    alt="BIZICAT Logo"
+                >
+
+                <span>BIZICAT</span>
+
+            </div>
+
+
+            <h1>
+                Build your digital
+                <span>business.</span>
+            </h1>
+
+
+            <p>
+                Join BIZICAT and create a professional digital catalog
+                where customers can discover your products and order
+                directly from you through WhatsApp.
+            </p>
+
+
+            <div class="benefits">
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        ▦
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Your Own Digital Catalog
+                        </strong>
+
+                        <small>
+                            Showcase products beautifully online
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        💬
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Direct WhatsApp Orders
+                        </strong>
+
+                        <small>
+                            Receive customer orders instantly
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        🏆
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Get Discovered
+                        </strong>
+
+                        <small>
+                            Reach new customers through BIZICAT
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================
+         REGISTRATION AREA
+    ====================================== -->
+
+    <main class="registration-panel">
+
+        <div class="registration-container">
+
+
+            <!-- MOBILE BRAND -->
+
+            <div class="mobile-brand">
+
+                <img
+                    src="bizicat-logo.png"
+                    alt="BIZICAT"
+                >
+
+                <span>BIZICAT</span>
+
+            </div>
+
+
+            <!-- REGISTRATION CARD -->
+
+            <div class="registration-card">
+
+
+                <!-- FORM AREA -->
+
+                <div id="registrationForm">
+
+
+                    <div class="form-header">
+
+                        <h2>
+                            Create your account
+                        </h2>
+
+                        <p>
+                            Let's get your business online with BIZICAT.
+                        </p>
+
+                    </div>
+
+
+                    <!-- PROGRESS -->
+
+                    <div class="progress-container">
+
+                        <div class="steps-header">
+
+                            <span id="stepText">
+                                Step 1 of 3
+                            </span>
+
+                            <span id="stepLabel">
+                                Account
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+
+                            <div
+                                class="progress-fill"
+                                id="progressFill">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =====================================
+                         STEP 1 - ACCOUNT
+                    ====================================== -->
+
+                    <div
+                        class="form-step active"
+                        id="step1">
+
+
+                        <div class="step-title">
+
+                            <h3>
+                                Create your account
+                            </h3>
+
+                            <p>
+                                Tell us a little about yourself.
+                            </p>
+
+                        </div>
+
+
+                        <div class="form-grid two">
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    First Name <span>*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="firstName"
+                                    placeholder="Your first name"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Last Name <span>*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="lastName"
+                                    placeholder="Your last name"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group full">
+
+                                <label>
+                                    Email Address <span>*</span>
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    placeholder="you@example.com"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group full">
+
+                                <label>
+                                    Create Password <span>*</span>
+                                </label>
+
+
+                                <div class="input-wrapper">
+
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        placeholder="Create a secure password"
+                                        oninput="checkPasswordStrength()"
+                                    >
+
+                                    <button
+                                        type="button"
+                                        class="toggle-password"
+                                        onclick="togglePassword()">
+
+                                        👁
+
+                                    </button>
+
+                                </div>
+
+
+                                <div class="password-strength">
+
+                                    <div class="strength-bars">
+
+                                        <div
+                                            class="strength-bar"
+                                            id="bar1">
+                                        </div>
+
+                                        <div
+                                            class="strength-bar"
+                                            id="bar2">
+                                        </div>
+
+                                        <div
+                                            class="strength-bar"
+                                            id="bar3">
+                                        </div>
+
+                                        <div
+                                            class="strength-bar"
+                                            id="bar4">
+                                        </div>
+
+                                    </div>
+
+                                    <span
+                                        class="strength-text"
+                                        id="strengthText">
+
+                                        Use at least 8 characters
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="form-actions">
+
+                            <button
+                                class="btn btn-primary"
+                                onclick="nextStep(1)">
+
+                                Continue →
+
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- =====================================
+                         STEP 2 - BUSINESS
+                    ====================================== -->
+
+                    <div
+                        class="form-step"
+                        id="step2">
+
+
+                        <div class="step-title">
+
+                            <h3>
+                                Tell us about your business
+                            </h3>
+
+                            <p>
+                                This information will help create your
+                                BIZICAT business profile.
+                            </p>
+
+                        </div>
+
+
+                        <div class="info-box">
+
+                            <div class="info-box-icon">
+                                🏪
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Your business, your identity
+                                </strong>
+
+                                <p>
+                                    You can edit these details later
+                                    from your merchant dashboard.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid two">
+
+
+                            <div class="form-group full">
+
+                                <label>
+                                    Business Name <span>*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="businessName"
+                                    placeholder="Example: My Awesome Store"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Business Category <span>*</span>
+                                </label>
+
+                                <select id="businessCategory">
+
+                                    <option value="">
+                                        Select category
+                                    </option>
+
+                                    <option>
+                                        Restaurant & Food
+                                    </option>
+
+                                    <option>
+                                        Clothing & Fashion
+                                    </option>
+
+                                    <option>
+                                        Beauty & Salon
+                                    </option>
+
+                                    <option>
+                                        Electronics
+                                    </option>
+
+                                    <option>
+                                        Gifts & Handmade
+                                    </option>
+
+                                    <option>
+                                        Grocery & Food
+                                    </option>
+
+                                    <option>
+                                        Home & Living
+                                    </option>
+
+                                    <option>
+                                        Services
+                                    </option>
+
+                                    <option>
+                                        Other
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Country <span>*</span>
+                                </label>
+
+                                <select id="country">
+
+                                    <option value="Sri Lanka">
+                                        Sri Lanka
+                                    </option>
+
+                                    <option>
+                                        Other
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group full">
+
+                                <label>
+                                    City / Area
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="city"
+                                    placeholder="Example: Colombo"
+                                >
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="form-actions">
+
+                            <button
+                                class="btn btn-back"
+                                onclick="previousStep(2)">
+
+                                ← Back
+
+                            </button>
+
+
+                            <button
+                                class="btn btn-primary"
+                                onclick="nextStep(2)">
+
+                                Continue →
+
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- =====================================
+                         STEP 3 - WHATSAPP
+                    ====================================== -->
+
+                    <div
+                        class="form-step"
+                        id="step3">
+
+
+                        <div class="step-title">
+
+                            <h3>
+                                Connect your business
+                            </h3>
+
+                            <p>
+                                Add the WhatsApp number where you want
+                                to receive customer orders.
+                            </p>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Business WhatsApp Number <span>*</span>
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="whatsapp"
+                                    placeholder="+94 77 123 4567"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Your BIZICAT Catalog Address
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="catalogName"
+                                    placeholder="my-business"
+                                    oninput="updateCatalogPreview()"
+                                >
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="whatsapp-preview">
+
+                            <div class="whatsapp-preview-header">
+
+                                <div class="whatsapp-icon">
+                                    💬
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        WhatsApp Order System
+                                    </strong>
+
+                                    <p>
+                                        Customers will send their
+                                        order directly to you.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-box" style="margin-top:18px;">
+
+                            <div class="info-box-icon">
+                                🔗
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Your future catalog link
+                                </strong>
+
+                                <p id="catalogPreview">
+                                    bizicat.com/store/your-business
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="checkbox-group">
+
+                            <input
+                                type="checkbox"
+                                id="terms"
+                            >
+
+                            <label for="terms">
+
+                                I agree to the
+                                <a href="#">Terms of Service</a>
+                                and
+                                <a href="#">Privacy Policy</a>.
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="form-actions">
+
+                            <button
+                                class="btn btn-back"
+                                onclick="previousStep(3)">
+
+                                ← Back
+
+                            </button>
+
+
+                            <button
+                                class="btn btn-teal"
+                                onclick="completeRegistration()">
+
+                                Create My Catalog 🚀
+
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- LOGIN LINK -->
+
+                    <div class="login-link">
+
+                        Already have an account?
+
+                        <a href="login.html">
+                            Log in
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =====================================
+                     SUCCESS SCREEN
+                ====================================== -->
+
+                <div
+                    class="success-screen"
+                    id="successScreen">
+
+
+                    <div class="success-icon">
+                        ✓
+                    </div>
+
+
+                    <h2>
+                        Welcome to BIZICAT!
+                    </h2>
+
+
+                    <p>
+                        Your merchant account has been created successfully.
+                        You're now ready to start building your digital catalog.
+                    </p>
+
+
+                    <div class="success-summary">
+
+
+                        <div class="summary-row">
+
+                            <span>Business</span>
+
+                            <strong id="summaryBusiness">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-row">
+
+                            <span>Category</span>
+
+                            <strong id="summaryCategory">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-row">
+
+                            <span>WhatsApp</span>
+
+                            <strong id="summaryWhatsapp">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <button
+                        class="btn btn-teal"
+                        style="width:100%;"
+                        onclick="goToDashboard()">
+
+                        Go to My Dashboard →
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+</div>
+
+
+
+<script>
+
+
+    /* =========================================
+       CURRENT STEP
+    ========================================= */
+
+    let currentStep = 1;
+
+
+
+    /* =========================================
+       NEXT STEP
+    ========================================= */
+
+    function nextStep(step) {
+
+
+        /* STEP 1 VALIDATION */
+
+        if (step === 1) {
+
+            const firstName =
+                document.getElementById("firstName").value.trim();
+
+            const lastName =
+                document.getElementById("lastName").value.trim();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+
+            if (
+                !firstName ||
+                !lastName ||
+                !email ||
+                !password
+            ) {
+
+                alert(
+                    "Please complete all required fields."
+                );
+
+                return;
+
+            }
+
+
+            if (password.length < 8) {
+
+                alert(
+                    "Your password must contain at least 8 characters."
+                );
+
+                return;
+
+            }
+
+        }
+
+
+
+        /* STEP 2 VALIDATION */
+
+        if (step === 2) {
+
+            const businessName =
+                document
+                    .getElementById("businessName")
+                    .value
+                    .trim();
+
+            const category =
+                document
+                    .getElementById("businessCategory")
+                    .value;
+
+
+            if (!businessName || !category) {
+
+                alert(
+                    "Please enter your business name and category."
+                );
+
+                return;
+
+            }
+
+        }
+
+
+        document
+            .getElementById("step" + step)
+            .classList
+            .remove("active");
+
+
+        currentStep = step + 1;
+
+
+        document
+            .getElementById("step" + currentStep)
+            .classList
+            .add("active");
+
+
+        updateProgress();
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+
+    /* =========================================
+       PREVIOUS STEP
+    ========================================= */
+
+    function previousStep(step) {
+
+
+        document
+            .getElementById("step" + step)
+            .classList
+            .remove("active");
+
+
+        currentStep = step - 1;
+
+
+        document
+            .getElementById("step" + currentStep)
+            .classList
+            .add("active");
+
+
+        updateProgress();
+
+    }
+
+
+
+    /* =========================================
+       PROGRESS
+    ========================================= */
+
+    function updateProgress() {
+
+
+        const progress =
+            document.getElementById("progressFill");
+
+
+        const stepText =
+            document.getElementById("stepText");
+
+
+        const stepLabel =
+            document.getElementById("stepLabel");
+
+
+        if (currentStep === 1) {
+
+            progress.style.width = "33.33%";
+
+            stepText.innerText = "Step 1 of 3";
+
+            stepLabel.innerText = "Account";
+
+        }
+
+
+        if (currentStep === 2) {
+
+            progress.style.width = "66.66%";
+
+            stepText.innerText = "Step 2 of 3";
+
+            stepLabel.innerText = "Business";
+
+        }
+
+
+        if (currentStep === 3) {
+
+            progress.style.width = "100%";
+
+            stepText.innerText = "Step 3 of 3";
+
+            stepLabel.innerText = "Setup";
+
+        }
+
+    }
+
+
+
+    /* =========================================
+       PASSWORD TOGGLE
+    ========================================= */
+
+    function togglePassword() {
+
+
+        const password =
+            document.getElementById("password");
+
+
+        if (password.type === "password") {
+
+            password.type = "text";
+
+        } else {
+
+            password.type = "password";
+
+        }
+
+    }
+
+
+
+    /* =========================================
+       PASSWORD STRENGTH
+    ========================================= */
+
+    function checkPasswordStrength() {
+
+
+        const password =
+            document.getElementById("password").value;
+
+
+        const bars = [
+
+            document.getElementById("bar1"),
+            document.getElementById("bar2"),
+            document.getElementById("bar3"),
+            document.getElementById("bar4")
+
+        ];
+
+
+        const text =
+            document.getElementById("strengthText");
+
+
+        bars.forEach(bar => {
+
+            bar.style.background = "#e8edf0";
+
+        });
+
+
+        if (password.length === 0) {
+
+            text.innerText =
+                "Use at least 8 characters";
+
+            return;
+
+        }
+
+
+        let score = 0;
+
+
+        if (password.length >= 8) score++;
+
+        if (/[A-Z]/.test(password)) score++;
+
+        if (/[0-9]/.test(password)) score++;
+
+        if (/[^A-Za-z0-9]/.test(password)) score++;
+
+
+        const colors = [
+
+            "#e5484d",
+            "#f5a524",
+            "#2da44e",
+            "#08a6b5"
+
+        ];
+
+
+        for (let i = 0; i < score; i++) {
+
+            bars[i].style.background =
+                colors[score - 1];
+
+        }
+
+
+        if (score === 1) {
+
+            text.innerText = "Weak password";
+
+        }
+
+        else if (score === 2) {
+
+            text.innerText = "Fair password";
+
+        }
+
+        else if (score === 3) {
+
+            text.innerText = "Strong password";
+
+        }
+
+        else if (score === 4) {
+
+            text.innerText = "Excellent password";
+
+        }
+
+    }
+
+
+
+    /* =========================================
+       CATALOG PREVIEW
+    ========================================= */
+
+    function updateCatalogPreview() {
+
+
+        let value =
+            document
+                .getElementById("catalogName")
+                .value
+                .trim();
+
+
+        value = value
+            .toLowerCase()
+            .replace(/[^a-z0-9-]/g, "-");
+
+
+        if (!value) {
+
+            value = "your-business";
+
+        }
+
+
+        document
+            .getElementById("catalogPreview")
+            .innerText =
+            "bizicat.com/store/" + value;
+
+    }
+
+
+
+    /* =========================================
+       COMPLETE REGISTRATION
+    ========================================= */
+
+    function completeRegistration() {
+
+
+        const whatsapp =
+            document
+                .getElementById("whatsapp")
+                .value
+                .trim();
+
+
+        const terms =
+            document
+                .getElementById("terms")
+                .checked;
+
+
+        if (!whatsapp) {
+
+            alert(
+                "Please enter your business WhatsApp number."
+            );
+
+            return;
+
+        }
+
+
+        if (!terms) {
+
+            alert(
+                "Please accept the Terms of Service and Privacy Policy."
+            );
+
+            return;
+
+        }
+
+
+        /* GET BUSINESS DETAILS */
+
+        const businessName =
+            document
+                .getElementById("businessName")
+                .value;
+
+
+        const category =
+            document
+                .getElementById("businessCategory")
+                .value;
+
+
+        /* UPDATE SUCCESS SCREEN */
+
+        document
+            .getElementById("summaryBusiness")
+            .innerText =
+            businessName;
+
+
+        document
+            .getElementById("summaryCategory")
+            .innerText =
+            category;
+
+
+        document
+            .getElementById("summaryWhatsapp")
+            .innerText =
+            whatsapp;
+
+
+        /* HIDE FORM */
+
+        document
+            .getElementById("registrationForm")
+            .style.display =
+            "none";
+
+
+        /* SHOW SUCCESS */
+
+        document
+            .getElementById("successScreen")
+            .style.display =
+            "block";
+
+    }
+
+
+
+    /* =========================================
+       DASHBOARD REDIRECT
+    ========================================= */
+
+    function goToDashboard() {
+
+
+        /*
+            When your real dashboard is ready,
+            change this to:
+
+            window.location.href = "dashboard.html";
+        */
+
+
+        alert(
+            "Your BIZICAT Merchant Dashboard will open here!"
+        );
+
+    }
+
+
+</script>
+
+
+</body>
+</html>
